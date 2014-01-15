@@ -7,6 +7,7 @@
 //
 
 #import <TMCache/TMCache.h>
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import "CacheHelper.h"
 #import "AppDelegate.h"
 
@@ -16,6 +17,8 @@
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[[TMCache sharedCache] memoryCache] setCostLimit:MEMORY_CACHE_COST_LIMIT];
+    [MagicalRecord setupAutoMigratingCoreDataStack];
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     return YES;
 }
 
@@ -41,7 +44,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    
+    [MagicalRecord cleanUp];
 }
 
 @end

@@ -9,14 +9,22 @@
 #import <TMCache/TMCache.h>
 #import "CacheHelper.h"
 #import "Blocks.h"
+#import "Country.h"
 
 NSString *const CacheHelperErrorDomain = @"CacheHelperErrorDomain";
+NSString *const MEMORY_CACHE_COUNTRIES_KEY = @"MEMORY_CACHE_COUNTRIES_KEY";
 int const MEMORY_CACHE_COST_LIMIT = 100;
 int const MEMORY_CACHE_COUNTRIES_COST = 50;
 
-@implementation CacheHelper
+@interface CacheHelper ()
 
-#pragma mark - Countries Protocol
+@end
+
+@implementation CacheHelper
+{
+}
+
+#pragma mark - CountriesFetcher Protocol
 
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
 {
@@ -35,6 +43,16 @@ int const MEMORY_CACHE_COUNTRIES_COST = 50;
                                           completion(nil, error);
                                       }
                                   }];
+}
+
+#pragma mark - CountriesStorage Protocol
+
+- (void)storeCountries:(NSArray *)countries
+{
+    [[[TMCache sharedCache] memoryCache] setObject:countries
+                                            forKey:MEMORY_CACHE_COUNTRIES_KEY
+                                          withCost:MEMORY_CACHE_COUNTRIES_COST
+                                             block:nil];
 }
 
 @end

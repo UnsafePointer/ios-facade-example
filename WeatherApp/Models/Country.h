@@ -8,7 +8,7 @@
 
 #import <Mantle/Mantle.h>
 
-@interface Country : MTLModel <MTLJSONSerializing>
+@interface Country : MTLModel <MTLJSONSerializing, MTLManagedObjectSerializing>
 
 @property (nonatomic, copy, readonly) NSString *countryName;
 @property (nonatomic, copy, readonly) NSString *currencyCode;

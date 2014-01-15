@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Cities.h"
-#import "Countries.h"
+#import "CitiesFetcher.h"
+#import "CountriesFetcher.h"
+#import "CountriesStorage.h"
 
 extern NSString * const CacheHelperErrorDomain;
+extern NSString * const MEMORY_CACHE_COUNTRIES_KEY;
 extern int const MEMORY_CACHE_COST_LIMIT;
 extern int const MEMORY_CACHE_COUNTRIES_COST;
 
-@interface CacheHelper : NSObject <Countries>
+@interface CacheHelper : NSObject <CountriesFetcher, CountriesStorage>
 
 @end

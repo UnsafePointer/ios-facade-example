@@ -10,7 +10,7 @@
 #import "Country.h"
 #import "Blocks.h"
 
-@protocol Cities <NSObject>
+@protocol CitiesFetcher <NSObject>
 
 - (void)getCitiesWithCountry:(Country *)country
                   completion:(ArrayCompletionBlock)completion;

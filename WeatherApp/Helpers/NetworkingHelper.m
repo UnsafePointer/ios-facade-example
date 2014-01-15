@@ -52,7 +52,7 @@
     return requestOperation;
 }
 
-#pragma mark - Cities Protocol
+#pragma mark - CitiesFetcher Protocol
 
 - (void)getCitiesWithCountry:(Country *)country
                   completion:(ArrayCompletionBlock)completion
@@ -69,7 +69,7 @@
     [[NSOperationQueue mainQueue] addOperation:requestOperation];
 }
 
-#pragma mark - Countries Protocol
+#pragma mark - CountriesFetcher Protocol
 
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
 {
@@ -83,10 +83,6 @@
         }
         NSArray *collection = [[self translatorHelper] translateCollectionFromJSON:[responseObject objectForKey:@"geonames"]
                                                                      withClassName:@"Country"];
-        [[[TMCache sharedCache] memoryCache] setObject:collection
-                                                forKey:@"Countries"
-                                              withCost:MEMORY_CACHE_COUNTRIES_COST
-                                                 block:nil];
         completion(collection, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (completion) {

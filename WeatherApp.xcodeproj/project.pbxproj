@@ -22,6 +22,9 @@
 		3FDA2BDB1886AC67001790F8 /* TranslatorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BDA1886AC67001790F8 /* TranslatorHelper.m */; };
 		3FDA2BDE1886B064001790F8 /* RequestOperationConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BDD1886B064001790F8 /* RequestOperationConfig.m */; };
 		3FDA2BE41886C074001790F8 /* CacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BE31886C074001790F8 /* CacheHelper.m */; };
+		3FDA2BE71886CFCF001790F8 /* Models.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BE51886CFCF001790F8 /* Models.xcdatamodeld */; };
+		3FDA2BEE1886DC54001790F8 /* MTLModel+FindAll.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BED1886DC54001790F8 /* MTLModel+FindAll.m */; };
+		3FDA2BF11886E301001790F8 /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BF01886E301001790F8 /* DatabaseHelper.m */; };
 		3FE6850618859A3800AEA2CD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6850518859A3800AEA2CD /* MainStoryboard.storyboard */; };
 		3FE6850C18859B3800AEA2CD /* CountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE6850B18859B3800AEA2CD /* CountriesViewController.m */; };
 		3FE6850F1885ADC400AEA2CD /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE6850E1885ADC400AEA2CD /* City.m */; };
@@ -62,11 +65,17 @@
 		3FDA2BDA1886AC67001790F8 /* TranslatorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TranslatorHelper.m; path = Helpers/TranslatorHelper.m; sourceTree = "<group>"; };
 		3FDA2BDC1886B064001790F8 /* RequestOperationConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestOperationConfig.h; path = Models/RequestOperationConfig.h; sourceTree = "<group>"; };
 		3FDA2BDD1886B064001790F8 /* RequestOperationConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestOperationConfig.m; path = Models/RequestOperationConfig.m; sourceTree = "<group>"; };
-		3FDA2BDF1886B272001790F8 /* Cities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Cities.h; path = Definitions/Cities.h; sourceTree = "<group>"; };
-		3FDA2BE01886B272001790F8 /* Countries.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Countries.h; path = Definitions/Countries.h; sourceTree = "<group>"; };
+		3FDA2BDF1886B272001790F8 /* CitiesFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CitiesFetcher.h; path = Definitions/CitiesFetcher.h; sourceTree = "<group>"; };
+		3FDA2BE01886B272001790F8 /* CountriesFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CountriesFetcher.h; path = Definitions/CountriesFetcher.h; sourceTree = "<group>"; };
 		3FDA2BE11886B290001790F8 /* Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Blocks.h; path = Definitions/Blocks.h; sourceTree = "<group>"; };
 		3FDA2BE21886C074001790F8 /* CacheHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CacheHelper.h; path = Helpers/CacheHelper.h; sourceTree = "<group>"; };
 		3FDA2BE31886C074001790F8 /* CacheHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheHelper.m; path = Helpers/CacheHelper.m; sourceTree = "<group>"; };
+		3FDA2BE61886CFCF001790F8 /* Models.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Models.xcdatamodel; sourceTree = "<group>"; };
+		3FDA2BEC1886DC54001790F8 /* MTLModel+FindAll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MTLModel+FindAll.h"; path = "Extensions/MTLModel+FindAll.h"; sourceTree = "<group>"; };
+		3FDA2BED1886DC54001790F8 /* MTLModel+FindAll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MTLModel+FindAll.m"; path = "Extensions/MTLModel+FindAll.m"; sourceTree = "<group>"; };
+		3FDA2BEF1886E301001790F8 /* DatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseHelper.h; path = Helpers/DatabaseHelper.h; sourceTree = "<group>"; };
+		3FDA2BF01886E301001790F8 /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseHelper.m; path = Helpers/DatabaseHelper.m; sourceTree = "<group>"; };
+		3FDA2BF21886E891001790F8 /* CountriesStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CountriesStorage.h; path = Definitions/CountriesStorage.h; sourceTree = "<group>"; };
 		3FE6850518859A3800AEA2CD /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = Views/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		3FE6850A18859B3800AEA2CD /* CountriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountriesViewController.h; path = Controllers/CountriesViewController.h; sourceTree = "<group>"; };
 		3FE6850B18859B3800AEA2CD /* CountriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountriesViewController.m; path = Controllers/CountriesViewController.m; sourceTree = "<group>"; };
@@ -142,9 +151,10 @@
 		3FC6F74818859382009D48CB /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				3FE6851C1885BAF800AEA2CD /* Definitions */,
 				3FC6F77A18859468009D48CB /* Application */,
 				3FE6850418859A0000AEA2CD /* Controllers */,
+				3FE6851C1885BAF800AEA2CD /* Definitions */,
+				3FDA2BEB1886DBE4001790F8 /* Extensions */,
 				3FE685181885B71E00AEA2CD /* Helpers */,
 				3FE685111885B6A500AEA2CD /* Managers */,
 				3FE685021885996C00AEA2CD /* Models */,
@@ -201,6 +211,15 @@
 			name = Tests;
 			sourceTree = "<group>";
 		};
+		3FDA2BEB1886DBE4001790F8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3FDA2BEC1886DC54001790F8 /* MTLModel+FindAll.h */,
+				3FDA2BED1886DC54001790F8 /* MTLModel+FindAll.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		3FE685021885996C00AEA2CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +229,7 @@
 				3FE685231885C64200AEA2CD /* Country.m */,
 				3FDA2BDC1886B064001790F8 /* RequestOperationConfig.h */,
 				3FDA2BDD1886B064001790F8 /* RequestOperationConfig.m */,
+				3FDA2BE51886CFCF001790F8 /* Models.xcdatamodeld */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -249,6 +269,8 @@
 				3FDA2BDA1886AC67001790F8 /* TranslatorHelper.m */,
 				3FDA2BE21886C074001790F8 /* CacheHelper.h */,
 				3FDA2BE31886C074001790F8 /* CacheHelper.m */,
+				3FDA2BEF1886E301001790F8 /* DatabaseHelper.h */,
+				3FDA2BF01886E301001790F8 /* DatabaseHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -257,8 +279,9 @@
 			isa = PBXGroup;
 			children = (
 				3FDA2BE11886B290001790F8 /* Blocks.h */,
-				3FDA2BDF1886B272001790F8 /* Cities.h */,
-				3FDA2BE01886B272001790F8 /* Countries.h */,
+				3FDA2BDF1886B272001790F8 /* CitiesFetcher.h */,
+				3FDA2BE01886B272001790F8 /* CountriesFetcher.h */,
+				3FDA2BF21886E891001790F8 /* CountriesStorage.h */,
 			);
 			name = Definitions;
 			sourceTree = "<group>";
@@ -395,7 +418,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FDA2BE41886C074001790F8 /* CacheHelper.m in Sources */,
+				3FDA2BE71886CFCF001790F8 /* Models.xcdatamodeld in Sources */,
 				3FE685241885C64200AEA2CD /* Country.m in Sources */,
+				3FDA2BF11886E301001790F8 /* DatabaseHelper.m in Sources */,
 				3FC6F77D18859472009D48CB /* AppDelegate.m in Sources */,
 				3FE685171885B6EE00AEA2CD /* WeatherAppManager.m in Sources */,
 				3FE6850C18859B3800AEA2CD /* CountriesViewController.m in Sources */,
@@ -403,6 +428,7 @@
 				3FE6851B1885B9B600AEA2CD /* NetworkingHelper.m in Sources */,
 				3FE6850F1885ADC400AEA2CD /* City.m in Sources */,
 				3FC6F77618859441009D48CB /* main.m in Sources */,
+				3FDA2BEE1886DC54001790F8 /* MTLModel+FindAll.m in Sources */,
 				3FDA2BDB1886AC67001790F8 /* TranslatorHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -620,6 +646,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3FDA2BE51886CFCF001790F8 /* Models.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3FDA2BE61886CFCF001790F8 /* Models.xcdatamodel */,
+			);
+			currentVersion = 3FDA2BE61886CFCF001790F8 /* Models.xcdatamodel */;
+			name = Models.xcdatamodeld;
+			path = Models/Models.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3FC6F73718859381009D48CB /* Project object */;
 }

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Cities.h"
-#import "Countries.h"
+#import "CitiesFetcher.h"
+#import "CountriesFetcher.h"
 
-@interface NetworkingHelper : NSObject <Cities, Countries>
+@interface NetworkingHelper : NSObject <CitiesFetcher, CountriesFetcher>
 
 @end

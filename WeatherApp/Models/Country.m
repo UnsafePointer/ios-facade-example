@@ -30,7 +30,34 @@
              @"east" : @"east",
              @"west" : @"west",
              @"geonameId" : @"geonameId"
-            };
+             };
+}
+
++ (NSDictionary *)managedObjectKeysByPropertyKey
+{
+    return @{
+             @"countryName" : @"countryName",
+             @"currencyCode" : @"currencyCode",
+             @"fipsCode" : @"fipsCode",
+             @"countryCode" : @"countryCode",
+             @"isoNumeric" : @"isoNumeric",
+             @"capital" : @"capital",
+             @"continentName" : @"continentName",
+             @"areaInSqKm" : @"areaInSqKm",
+             @"languages" : @"languages",
+             @"isoAlpha3" : @"isoAlpha3",
+             @"continent" : @"continent",
+             @"population" : @"population",
+             @"north" : @"north",
+             @"south" : @"south",
+             @"east" : @"east",
+             @"west" : @"west",
+             @"geonameId" : @"geonameId"
+             };
+}
+
++ (NSString *)managedObjectEntityName {
+    return @"Country";
 }
 
 @end

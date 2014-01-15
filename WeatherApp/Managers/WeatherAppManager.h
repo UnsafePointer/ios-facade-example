@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Cities.h"
-#import "Countries.h"
+#import "CitiesFetcher.h"
+#import "CountriesFetcher.h"
 
-@interface WeatherAppManager : NSObject <Cities, Countries>
+@interface WeatherAppManager : NSObject <CitiesFetcher, CountriesFetcher>
 
 + (WeatherAppManager *)sharedManager;
 

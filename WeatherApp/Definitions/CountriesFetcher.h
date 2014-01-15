@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol Countries <NSObject>
+@protocol CountriesFetcher <NSObject>
 
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion;
 

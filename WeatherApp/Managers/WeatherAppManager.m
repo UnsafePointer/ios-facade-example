@@ -10,11 +10,13 @@
 #import "WeatherAppManager.h"
 #import "NetworkingHelper.h"
 #import "CacheHelper.h"
+#import "DatabaseHelper.h"
 
 @interface WeatherAppManager ()
 
 @property (nonatomic, strong) NetworkingHelper *networkingHelper;
 @property (nonatomic, strong) CacheHelper *cacheHelper;
+@property (nonatomic, strong) DatabaseHelper *databaseHelper;
 
 @end
 
@@ -42,6 +44,14 @@ static dispatch_once_t oncePredicate;
     return _cacheHelper;
 }
 
+- (DatabaseHelper *)databaseHelper
+{
+    if (_databaseHelper == nil) {
+        _databaseHelper = [[DatabaseHelper alloc] init];
+    }
+    return _databaseHelper;
+}
+
 #pragma mark - Class Methods
 
 + (WeatherAppManager *)sharedManager
@@ -53,16 +63,15 @@ static dispatch_once_t oncePredicate;
     return _sharedManager;
 }
 
-#pragma mark - Cities Protocol
+#pragma mark - CitiesFetcher Protocol
 
-- (void)getCitiesFromLatitude:(double)latitude
-                    longitude:(double)longitude
-                   completion:(ArrayCompletionBlock)completion
+- (void)getCitiesWithCountry:(Country *)country
+                  completion:(ArrayCompletionBlock)completion
 {
     
 }
 
-#pragma mark - Countries
+#pragma mark - CountriesStorage Protocol
 
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
 {
@@ -71,7 +80,26 @@ static dispatch_once_t oncePredicate;
             completion(array, nil);
         }
         else {
-            [[self networkingHelper] getCountriesWithCompletion:completion];
+            [[self databaseHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+                if ([array count] > 0) {
+                    [[self cacheHelper] storeCountries:array];
+                    completion(array, nil);
+                }
+                else {
+                    [[self networkingHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+                        if (!error) {
+                            if (array) {
+                                [[self cacheHelper] storeCountries:array];
+                                [[self databaseHelper] storeCountries:array];
+                                completion(array, nil);
+                            }
+                        }
+                        else {
+                            completion(nil, error);
+                        }
+                    }];
+                }
+            }];
         }
     }];
 }
