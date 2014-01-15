@@ -19,8 +19,15 @@
 		3FC6F77E18859495009D48CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6F78018859495009D48CB /* InfoPlist.strings */; };
 		3FC6F787188594D1009D48CB /* WeatherAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC6F786188594D1009D48CB /* WeatherAppTests.m */; };
 		3FC6F788188594D7009D48CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FC6F78A188594D7009D48CB /* InfoPlist.strings */; };
+		3FDA2BDB1886AC67001790F8 /* TranslatorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BDA1886AC67001790F8 /* TranslatorHelper.m */; };
+		3FDA2BDE1886B064001790F8 /* RequestOperationConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BDD1886B064001790F8 /* RequestOperationConfig.m */; };
+		3FDA2BE41886C074001790F8 /* CacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BE31886C074001790F8 /* CacheHelper.m */; };
 		3FE6850618859A3800AEA2CD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6850518859A3800AEA2CD /* MainStoryboard.storyboard */; };
-		3FE6850C18859B3800AEA2CD /* CitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE6850B18859B3800AEA2CD /* CitiesViewController.m */; };
+		3FE6850C18859B3800AEA2CD /* CountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE6850B18859B3800AEA2CD /* CountriesViewController.m */; };
+		3FE6850F1885ADC400AEA2CD /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE6850E1885ADC400AEA2CD /* City.m */; };
+		3FE685171885B6EE00AEA2CD /* WeatherAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE685161885B6EE00AEA2CD /* WeatherAppManager.m */; };
+		3FE6851B1885B9B600AEA2CD /* NetworkingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE6851A1885B9B600AEA2CD /* NetworkingHelper.m */; };
+		3FE685241885C64200AEA2CD /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE685231885C64200AEA2CD /* Country.m */; };
 		E56CA4BD26154E279309C175 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE92C69A36A446797C4099F /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -51,9 +58,26 @@
 		3FC6F782188594B1009D48CB /* WeatherAppTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "WeatherAppTests-Info.plist"; path = "Supporting/WeatherAppTests-Info.plist"; sourceTree = "<group>"; };
 		3FC6F786188594D1009D48CB /* WeatherAppTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherAppTests.m; path = Tests/WeatherAppTests.m; sourceTree = "<group>"; };
 		3FC6F789188594D7009D48CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3FDA2BD91886AC67001790F8 /* TranslatorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TranslatorHelper.h; path = Helpers/TranslatorHelper.h; sourceTree = "<group>"; };
+		3FDA2BDA1886AC67001790F8 /* TranslatorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TranslatorHelper.m; path = Helpers/TranslatorHelper.m; sourceTree = "<group>"; };
+		3FDA2BDC1886B064001790F8 /* RequestOperationConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestOperationConfig.h; path = Models/RequestOperationConfig.h; sourceTree = "<group>"; };
+		3FDA2BDD1886B064001790F8 /* RequestOperationConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestOperationConfig.m; path = Models/RequestOperationConfig.m; sourceTree = "<group>"; };
+		3FDA2BDF1886B272001790F8 /* Cities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Cities.h; path = Definitions/Cities.h; sourceTree = "<group>"; };
+		3FDA2BE01886B272001790F8 /* Countries.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Countries.h; path = Definitions/Countries.h; sourceTree = "<group>"; };
+		3FDA2BE11886B290001790F8 /* Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Blocks.h; path = Definitions/Blocks.h; sourceTree = "<group>"; };
+		3FDA2BE21886C074001790F8 /* CacheHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CacheHelper.h; path = Helpers/CacheHelper.h; sourceTree = "<group>"; };
+		3FDA2BE31886C074001790F8 /* CacheHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CacheHelper.m; path = Helpers/CacheHelper.m; sourceTree = "<group>"; };
 		3FE6850518859A3800AEA2CD /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = Views/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		3FE6850A18859B3800AEA2CD /* CitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CitiesViewController.h; path = Controllers/CitiesViewController.h; sourceTree = "<group>"; };
-		3FE6850B18859B3800AEA2CD /* CitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesViewController.m; path = Controllers/CitiesViewController.m; sourceTree = "<group>"; };
+		3FE6850A18859B3800AEA2CD /* CountriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountriesViewController.h; path = Controllers/CountriesViewController.h; sourceTree = "<group>"; };
+		3FE6850B18859B3800AEA2CD /* CountriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountriesViewController.m; path = Controllers/CountriesViewController.m; sourceTree = "<group>"; };
+		3FE6850D1885ADC400AEA2CD /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = City.h; path = Models/City.h; sourceTree = "<group>"; };
+		3FE6850E1885ADC400AEA2CD /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = City.m; path = Models/City.m; sourceTree = "<group>"; };
+		3FE685151885B6EE00AEA2CD /* WeatherAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeatherAppManager.h; path = Managers/WeatherAppManager.h; sourceTree = "<group>"; };
+		3FE685161885B6EE00AEA2CD /* WeatherAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeatherAppManager.m; path = Managers/WeatherAppManager.m; sourceTree = "<group>"; };
+		3FE685191885B9B600AEA2CD /* NetworkingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkingHelper.h; path = Helpers/NetworkingHelper.h; sourceTree = "<group>"; };
+		3FE6851A1885B9B600AEA2CD /* NetworkingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkingHelper.m; path = Helpers/NetworkingHelper.m; sourceTree = "<group>"; };
+		3FE685221885C64200AEA2CD /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Country.h; path = Models/Country.h; sourceTree = "<group>"; };
+		3FE685231885C64200AEA2CD /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Country.m; path = Models/Country.m; sourceTree = "<group>"; };
 		4CE92C69A36A446797C4099F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9024A222918D441B929F651E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,8 +142,11 @@
 		3FC6F74818859382009D48CB /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				3FE6851C1885BAF800AEA2CD /* Definitions */,
 				3FC6F77A18859468009D48CB /* Application */,
 				3FE6850418859A0000AEA2CD /* Controllers */,
+				3FE685181885B71E00AEA2CD /* Helpers */,
+				3FE685111885B6A500AEA2CD /* Managers */,
 				3FE685021885996C00AEA2CD /* Models */,
 				3FE68503188599FB00AEA2CD /* Views */,
 				3FC6F7781885945B009D48CB /* Images.xcassets */,
@@ -177,6 +204,12 @@
 		3FE685021885996C00AEA2CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3FE6850D1885ADC400AEA2CD /* City.h */,
+				3FE6850E1885ADC400AEA2CD /* City.m */,
+				3FE685221885C64200AEA2CD /* Country.h */,
+				3FE685231885C64200AEA2CD /* Country.m */,
+				3FDA2BDC1886B064001790F8 /* RequestOperationConfig.h */,
+				3FDA2BDD1886B064001790F8 /* RequestOperationConfig.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -192,10 +225,42 @@
 		3FE6850418859A0000AEA2CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3FE6850A18859B3800AEA2CD /* CitiesViewController.h */,
-				3FE6850B18859B3800AEA2CD /* CitiesViewController.m */,
+				3FE6850A18859B3800AEA2CD /* CountriesViewController.h */,
+				3FE6850B18859B3800AEA2CD /* CountriesViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		3FE685111885B6A500AEA2CD /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				3FE685151885B6EE00AEA2CD /* WeatherAppManager.h */,
+				3FE685161885B6EE00AEA2CD /* WeatherAppManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		3FE685181885B71E00AEA2CD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3FE685191885B9B600AEA2CD /* NetworkingHelper.h */,
+				3FE6851A1885B9B600AEA2CD /* NetworkingHelper.m */,
+				3FDA2BD91886AC67001790F8 /* TranslatorHelper.h */,
+				3FDA2BDA1886AC67001790F8 /* TranslatorHelper.m */,
+				3FDA2BE21886C074001790F8 /* CacheHelper.h */,
+				3FDA2BE31886C074001790F8 /* CacheHelper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		3FE6851C1885BAF800AEA2CD /* Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				3FDA2BE11886B290001790F8 /* Blocks.h */,
+				3FDA2BDF1886B272001790F8 /* Cities.h */,
+				3FDA2BE01886B272001790F8 /* Countries.h */,
+			);
+			name = Definitions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,9 +394,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FDA2BE41886C074001790F8 /* CacheHelper.m in Sources */,
+				3FE685241885C64200AEA2CD /* Country.m in Sources */,
 				3FC6F77D18859472009D48CB /* AppDelegate.m in Sources */,
-				3FE6850C18859B3800AEA2CD /* CitiesViewController.m in Sources */,
+				3FE685171885B6EE00AEA2CD /* WeatherAppManager.m in Sources */,
+				3FE6850C18859B3800AEA2CD /* CountriesViewController.m in Sources */,
+				3FDA2BDE1886B064001790F8 /* RequestOperationConfig.m in Sources */,
+				3FE6851B1885B9B600AEA2CD /* NetworkingHelper.m in Sources */,
+				3FE6850F1885ADC400AEA2CD /* City.m in Sources */,
 				3FC6F77618859441009D48CB /* main.m in Sources */,
+				3FDA2BDB1886AC67001790F8 /* TranslatorHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

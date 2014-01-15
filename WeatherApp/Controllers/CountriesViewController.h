@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CitiesViewController : UITableViewController
+@interface CountriesViewController : UITableViewController
 
 - (IBAction)onRefreshControlValueChanged:(id)sender;
 
