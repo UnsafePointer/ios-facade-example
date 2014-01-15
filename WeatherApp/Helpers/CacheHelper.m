@@ -16,6 +16,8 @@ NSString *const MEMORY_CACHE_COUNTRIES_KEY = @"MEMORY_CACHE_COUNTRIES_KEY";
 int const MEMORY_CACHE_COST_LIMIT = 100;
 int const MEMORY_CACHE_COUNTRIES_COST = 50;
 
+static const int ddLogLevel = LOG_LEVEL_INFO;
+
 @interface CacheHelper ()
 
 @end
@@ -28,7 +30,7 @@ int const MEMORY_CACHE_COUNTRIES_COST = 50;
 
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
 {
-    [[TMCache sharedCache] objectForKey:@"Countries"
+    [[TMCache sharedCache] objectForKey:MEMORY_CACHE_COUNTRIES_KEY
                                   block:^(TMCache *cache, NSString *key, id object) {
                                       if (object) {
                                           completion(object, nil);
@@ -40,6 +42,7 @@ int const MEMORY_CACHE_COUNTRIES_COST = 50;
                                           NSError *error = [NSError errorWithDomain:CacheHelperErrorDomain
                                                                                code:-13
                                                                            userInfo:userInfo];
+                                          DDLogInfo(@"Countries failed to retrieved from memory with Error %@", [error localizedDescription]);
                                           completion(nil, error);
                                       }
                                   }];
@@ -52,7 +55,20 @@ int const MEMORY_CACHE_COUNTRIES_COST = 50;
     [[[TMCache sharedCache] memoryCache] setObject:countries
                                             forKey:MEMORY_CACHE_COUNTRIES_KEY
                                           withCost:MEMORY_CACHE_COUNTRIES_COST
-                                             block:nil];
+                                             block:^(TMMemoryCache *cache, NSString *key, id object) {
+                                                 if (object) {
+                                                     DDLogInfo(@"Countries stored on memory without errors");
+                                                 }
+                                                 else {
+                                                     NSDictionary *userInfo = @{
+                                                                                NSLocalizedDescriptionKey: @"Object not available in memory",
+                                                                                };
+                                                     NSError *error = [NSError errorWithDomain:CacheHelperErrorDomain
+                                                                                          code:-13
+                                                                                      userInfo:userInfo];
+                                                     DDLogInfo(@"Countries failed to stored on memory with Error %@", [error localizedDescription]);
+                                                 }
+                                             }];
 }
 
 @end

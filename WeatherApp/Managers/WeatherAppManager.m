@@ -21,6 +21,7 @@
 @end
 
 static dispatch_once_t oncePredicate;
+static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @implementation WeatherAppManager
 {
@@ -71,6 +72,7 @@ static dispatch_once_t oncePredicate;
     [[self networkingHelper] getCitiesWithCountry:country completion:^(NSArray *array, NSError *error) {
         if (!error) {
             if (array) {
+                DDLogInfo(@"Cities retrieved from network");
                 completion(array, nil);
             }
         }
@@ -86,12 +88,14 @@ static dispatch_once_t oncePredicate;
 {
     [[self cacheHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
         if (array) {
+            DDLogInfo(@"Contries retrieved from memory");
             completion(array, nil);
         }
         else {
             [[self databaseHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
                 if ([array count] > 0) {
                     [[self cacheHelper] storeCountries:array];
+                    DDLogInfo(@"Contries retrieved from database");
                     completion(array, nil);
                 }
                 else {
@@ -100,6 +104,7 @@ static dispatch_once_t oncePredicate;
                             if (array) {
                                 [[self cacheHelper] storeCountries:array];
                                 [[self databaseHelper] storeCountries:array];
+                                DDLogInfo(@"Contries retrieved from network");
                                 completion(array, nil);
                             }
                         }

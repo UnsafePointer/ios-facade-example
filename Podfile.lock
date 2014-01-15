@@ -17,6 +17,12 @@ PODS:
   - AFNetworking/Serialization (2.0.3)
   - AFNetworking/UIKit (2.0.3):
     - AFNetworking/NSURLConnection
+  - CocoaLumberjack (1.7.0):
+    - CocoaLumberjack/Core
+    - CocoaLumberjack/Extensions
+  - CocoaLumberjack/Core (1.7.0)
+  - CocoaLumberjack/Extensions (1.7.0):
+    - CocoaLumberjack/Core
   - MagicalRecord (2.2)
   - Mantle (1.3.1):
     - Mantle/extobjc
@@ -25,12 +31,14 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0.3)
+  - CocoaLumberjack (~> 1.7.0)
   - MagicalRecord (~> 2.2)
   - Mantle (~> 1.3.1)
   - TMCache (~> 1.2.0)
 
 SPEC CHECKSUMS:
   AFNetworking: e499052cbf3d743e9bb727bb37adb9dc2547ba15
+  CocoaLumberjack: be87113f649942f020a37c061c58009b6ee5ff68
   MagicalRecord: b1fc46c99a9749fe7fe7e6f43a89b62ef5201933
   Mantle: abc3b0c81bc66eb624cf9cebb8640e377d5a44ae
   TMCache: 4b05e1b124d9f7e8d449640e059cff4cda17ed27

@@ -8,6 +8,8 @@
 
 #import <TMCache/TMCache.h>
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+#import <CocoaLumberjack/DDTTYLogger.h>
+#import <CocoaLumberjack/DDASLLogger.h>
 #import "CacheHelper.h"
 #import "AppDelegate.h"
 
@@ -19,6 +21,8 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     [[[TMCache sharedCache] memoryCache] setCostLimit:MEMORY_CACHE_COST_LIMIT];
     [MagicalRecord setupAutoMigratingCoreDataStack];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
     return YES;
 }
 

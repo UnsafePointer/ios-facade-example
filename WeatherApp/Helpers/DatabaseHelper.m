@@ -9,6 +9,8 @@
 #import "DatabaseHelper.h"
 #import "MTLModel+FindAll.h"
 
+static const int ddLogLevel = LOG_LEVEL_INFO;
+
 @implementation DatabaseHelper
 
 #pragma mark - CitiesFetcher Protocol
@@ -39,7 +41,12 @@
                                                       error:&error];
         }];
     } completion:^(BOOL success, NSError *error) {
-        
+        if (success) {
+            DDLogInfo(@"Countries stored on database without errors");
+        }
+        else {
+            DDLogInfo(@"Countries failed to stored on database with Error %@", [error localizedDescription]);
+        }
     }];
 }
 
