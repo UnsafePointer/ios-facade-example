@@ -69,15 +69,24 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)getCitiesWithCountry:(Country *)country
                   completion:(ArrayCompletionBlock)completion
 {
-    [[self networkingHelper] getCitiesWithCountry:country completion:^(NSArray *array, NSError *error) {
-        if (!error) {
-            if (array) {
-                DDLogInfo(@"Cities retrieved from network");
-                completion(array, nil);
-            }
+    [[self cacheHelper] getCitiesWithCountry:country completion:^(NSArray *array, NSError *error) {
+        if (array) {
+            DDLogInfo(@"Cities retrieved from memory");
+            completion(array, nil);
         }
         else {
-            completion(nil, error);
+            [[self networkingHelper] getCitiesWithCountry:country completion:^(NSArray *array, NSError *error) {
+                if (!error) {
+                    if (array) {
+                        [[self cacheHelper] storeCities:array fromCountry:country];
+                        DDLogInfo(@"Cities retrieved from network");
+                        completion(array, nil);
+                    }
+                }
+                else {
+                    completion(nil, error);
+                }
+            }];
         }
     }];
 }

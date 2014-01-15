@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CitiesFetcher.h"
 #import "CountriesFetcher.h"
 #import "CountriesStorage.h"
+#import "CitiesFetcher.h"
+#import "CitiesStorage.h"
 
-@interface DatabaseHelper : NSObject <CitiesFetcher, CountriesFetcher, CountriesStorage>
+@interface DatabaseHelper : NSObject <CountriesFetcher, CountriesStorage, CitiesFetcher, CitiesStorage>
 
 @end

@@ -46,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F380DF718871C3D00BAEC2F /* CitiesStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CitiesStorage.h; path = Definitions/CitiesStorage.h; sourceTree = "<group>"; };
 		3FC6F73F18859381009D48CB /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC6F74218859381009D48CB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3FC6F74418859381009D48CB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -284,9 +285,10 @@
 			isa = PBXGroup;
 			children = (
 				3FDA2BE11886B290001790F8 /* Blocks.h */,
-				3FDA2BDF1886B272001790F8 /* CitiesFetcher.h */,
 				3FDA2BE01886B272001790F8 /* CountriesFetcher.h */,
 				3FDA2BF21886E891001790F8 /* CountriesStorage.h */,
+				3FDA2BDF1886B272001790F8 /* CitiesFetcher.h */,
+				3F380DF718871C3D00BAEC2F /* CitiesStorage.h */,
 			);
 			name = Definitions;
 			sourceTree = "<group>";

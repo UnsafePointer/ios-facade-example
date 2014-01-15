@@ -21,6 +21,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
+#pragma mark - CitiesStorage Protocol
+
+- (void)storeCities:(NSArray *)cities fromCountry:(Country *)country
+{
+    
+}
+
 #pragma mark - CountriesFetcher Protocol
 
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion

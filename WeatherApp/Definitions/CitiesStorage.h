@@ -1,5 +1,5 @@
 //
-//  CountriesStorage.h
+//  CitiesStorage.h
 //  WeatherApp
 //
 //  Created by Renzo Crisóstomo on 1/15/14.
@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol CountriesStorage <NSObject>
+@class Country;
 
-- (void)storeCountries:(NSArray *)cities;
+@protocol CitiesStorage <NSObject>
+
+- (void)storeCities:(NSArray *)cities fromCountry:(Country *)country;
 
 @end
