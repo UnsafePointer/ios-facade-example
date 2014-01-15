@@ -13,6 +13,7 @@
 #import "Country.h"
 #import "TranslatorHelper.h"
 #import "Blocks.h"
+#import "CacheHelper.h"
 
 @interface NetworkingHelper ()
 
@@ -53,9 +54,8 @@
 
 #pragma mark - Cities Protocol
 
-- (void)getCitiesFromLatitude:(double)latitude
-                    longitude:(double)longitude
-                   completion:(ArrayCompletionBlock)completion
+- (void)getCitiesWithCountry:(Country *)country
+                  completion:(ArrayCompletionBlock)completion
 {
     AFHTTPRequestOperation *requestOperation = [NetworkingHelper createHTTPRequestOperationWithConfiguration:^(RequestOperationConfig *config) {
         config.URL = [NSURL URLWithString:@"http://api.openweathermap.org/data/2.5/find?lat=57&lon=-2.15"];
@@ -83,9 +83,10 @@
         }
         NSArray *collection = [[self translatorHelper] translateCollectionFromJSON:[responseObject objectForKey:@"geonames"]
                                                                      withClassName:@"Country"];
-        [[TMCache sharedCache] setObject:collection
-                                  forKey:@"Countries"
-                                   block:nil];
+        [[[TMCache sharedCache] memoryCache] setObject:collection
+                                                forKey:@"Countries"
+                                              withCost:MEMORY_CACHE_COUNTRIES_COST
+                                                 block:nil];
         completion(collection, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (completion) {

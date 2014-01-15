@@ -66,12 +66,14 @@ static dispatch_once_t oncePredicate;
 
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
 {
-    if ([[self cacheHelper] objectIsAvailableForKey:@"Countries"]) {
-        [[self cacheHelper] getCountriesWithCompletion:completion];
-    }
-    else {
-        [[self networkingHelper] getCountriesWithCompletion:completion];
-    }
+    [[self cacheHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+        if (array) {
+            completion(array, nil);
+        }
+        else {
+            [[self networkingHelper] getCountriesWithCompletion:completion];
+        }
+    }];
 }
 
 @end

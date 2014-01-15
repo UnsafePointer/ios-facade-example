@@ -10,8 +10,10 @@
 #import "Cities.h"
 #import "Countries.h"
 
-@interface CacheHelper : NSObject <Cities, Countries>
+extern NSString * const CacheHelperErrorDomain;
+extern int const MEMORY_CACHE_COST_LIMIT;
+extern int const MEMORY_CACHE_COUNTRIES_COST;
 
-- (BOOL)objectIsAvailableForKey:(NSString *)key;
+@interface CacheHelper : NSObject <Countries>
 
 @end

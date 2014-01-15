@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Country.h"
 #import "Blocks.h"
 
 @protocol Cities <NSObject>
 
-- (void)getCitiesFromLatitude:(double)latitude
-                    longitude:(double)longitude
-                   completion:(ArrayCompletionBlock)completion;
+- (void)getCitiesWithCountry:(Country *)country
+                  completion:(ArrayCompletionBlock)completion;
 
 @end

@@ -10,23 +10,11 @@
 #import "CacheHelper.h"
 #import "Blocks.h"
 
+NSString *const CacheHelperErrorDomain = @"CacheHelperErrorDomain";
+int const MEMORY_CACHE_COST_LIMIT = 100;
+int const MEMORY_CACHE_COUNTRIES_COST = 50;
+
 @implementation CacheHelper
-
-#pragma mark - Public Methods
-
-- (BOOL)objectIsAvailableForKey:(NSString *)key
-{
-    return [[[TMCache sharedCache] memoryCache] objectForKey:key] || [[[TMCache sharedCache] diskCache] fileURLForKey:key];
-}
-
-#pragma mark - Cities Protocol
-
-- (void)getCitiesFromLatitude:(double)latitude
-                    longitude:(double)longitude
-                   completion:(ArrayCompletionBlock)completion
-{
-    
-}
 
 #pragma mark - Countries Protocol
 
@@ -34,7 +22,18 @@
 {
     [[TMCache sharedCache] objectForKey:@"Countries"
                                   block:^(TMCache *cache, NSString *key, id object) {
-                                      completion(object, nil);
+                                      if (object) {
+                                          completion(object, nil);
+                                      }
+                                      else {
+                                          NSDictionary *userInfo = @{
+                                                                     NSLocalizedDescriptionKey: @"Object not available in memory",
+                                                                    };
+                                          NSError *error = [NSError errorWithDomain:CacheHelperErrorDomain
+                                                                               code:-13
+                                                                           userInfo:userInfo];
+                                          completion(nil, error);
+                                      }
                                   }];
 }
 
