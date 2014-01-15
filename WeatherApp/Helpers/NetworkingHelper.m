@@ -58,13 +58,20 @@
                   completion:(ArrayCompletionBlock)completion
 {
     AFHTTPRequestOperation *requestOperation = [NetworkingHelper createHTTPRequestOperationWithConfiguration:^(RequestOperationConfig *config) {
-        config.URL = [NSURL URLWithString:@"http://api.openweathermap.org/data/2.5/find?lat=57&lon=-2.15"];
+        config.URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.geonames.org/searchJSON?country=%@&username=WeatherApp", country.countryCode]];
         config.responseSerializer = [AFJSONResponseSerializer serializer];
     }];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+        if (!completion) {
+            return;
+        }
+        NSArray *collection = [[self translatorHelper] translateCollectionFromJSON:[responseObject objectForKey:@"geonames"]
+                                                                     withClassName:@"City"];
+        completion(collection, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
+        if (completion) {
+            completion(nil, error);
+        }
     }];
     [[NSOperationQueue mainQueue] addOperation:requestOperation];
 }

@@ -7,6 +7,7 @@
 //
 
 #import "CountriesViewController.h"
+#import "CitiesViewController.h"
 #import "WeatherAppManager.h"
 #import "Country.h"
 
@@ -36,6 +37,15 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"CitySegue"]) {
+        CitiesViewController *viewController = (CitiesViewController *)[segue destinationViewController];
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        Country *country = [_countries objectAtIndex:selectedIndexPath.row];
+        viewController.country = country;
+    }}
 
 #pragma mark - IBAction
 

@@ -6,8 +6,12 @@
 //  Copyright (c) 2014 Ruenzuo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Mantle/Mantle.h>
 
-@interface City : NSObject
+@interface City : MTLModel <MTLJSONSerializing, MTLManagedObjectSerializing>
+
+@property (nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, copy, readonly) NSNumber *lng;
+@property (nonatomic, copy, readonly) NSNumber *lat;
 
 @end

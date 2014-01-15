@@ -25,6 +25,7 @@
 		3FDA2BE71886CFCF001790F8 /* Models.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BE51886CFCF001790F8 /* Models.xcdatamodeld */; };
 		3FDA2BEE1886DC54001790F8 /* MTLModel+FindAll.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BED1886DC54001790F8 /* MTLModel+FindAll.m */; };
 		3FDA2BF11886E301001790F8 /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BF01886E301001790F8 /* DatabaseHelper.m */; };
+		3FDA2BF81886F1AE001790F8 /* CitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDA2BF71886F1AE001790F8 /* CitiesViewController.m */; };
 		3FE6850618859A3800AEA2CD /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE6850518859A3800AEA2CD /* MainStoryboard.storyboard */; };
 		3FE6850C18859B3800AEA2CD /* CountriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE6850B18859B3800AEA2CD /* CountriesViewController.m */; };
 		3FE6850F1885ADC400AEA2CD /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE6850E1885ADC400AEA2CD /* City.m */; };
@@ -76,6 +77,8 @@
 		3FDA2BEF1886E301001790F8 /* DatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatabaseHelper.h; path = Helpers/DatabaseHelper.h; sourceTree = "<group>"; };
 		3FDA2BF01886E301001790F8 /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatabaseHelper.m; path = Helpers/DatabaseHelper.m; sourceTree = "<group>"; };
 		3FDA2BF21886E891001790F8 /* CountriesStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CountriesStorage.h; path = Definitions/CountriesStorage.h; sourceTree = "<group>"; };
+		3FDA2BF61886F1AE001790F8 /* CitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CitiesViewController.h; path = Controllers/CitiesViewController.h; sourceTree = "<group>"; };
+		3FDA2BF71886F1AE001790F8 /* CitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesViewController.m; path = Controllers/CitiesViewController.m; sourceTree = "<group>"; };
 		3FE6850518859A3800AEA2CD /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainStoryboard.storyboard; path = Views/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		3FE6850A18859B3800AEA2CD /* CountriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountriesViewController.h; path = Controllers/CountriesViewController.h; sourceTree = "<group>"; };
 		3FE6850B18859B3800AEA2CD /* CountriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountriesViewController.m; path = Controllers/CountriesViewController.m; sourceTree = "<group>"; };
@@ -223,10 +226,10 @@
 		3FE685021885996C00AEA2CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3FE6850D1885ADC400AEA2CD /* City.h */,
-				3FE6850E1885ADC400AEA2CD /* City.m */,
 				3FE685221885C64200AEA2CD /* Country.h */,
 				3FE685231885C64200AEA2CD /* Country.m */,
+				3FE6850D1885ADC400AEA2CD /* City.h */,
+				3FE6850E1885ADC400AEA2CD /* City.m */,
 				3FDA2BDC1886B064001790F8 /* RequestOperationConfig.h */,
 				3FDA2BDD1886B064001790F8 /* RequestOperationConfig.m */,
 				3FDA2BE51886CFCF001790F8 /* Models.xcdatamodeld */,
@@ -247,6 +250,8 @@
 			children = (
 				3FE6850A18859B3800AEA2CD /* CountriesViewController.h */,
 				3FE6850B18859B3800AEA2CD /* CountriesViewController.m */,
+				3FDA2BF61886F1AE001790F8 /* CitiesViewController.h */,
+				3FDA2BF71886F1AE001790F8 /* CitiesViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 				3FC6F77D18859472009D48CB /* AppDelegate.m in Sources */,
 				3FE685171885B6EE00AEA2CD /* WeatherAppManager.m in Sources */,
 				3FE6850C18859B3800AEA2CD /* CountriesViewController.m in Sources */,
+				3FDA2BF81886F1AE001790F8 /* CitiesViewController.m in Sources */,
 				3FDA2BDE1886B064001790F8 /* RequestOperationConfig.m in Sources */,
 				3FE6851B1885B9B600AEA2CD /* NetworkingHelper.m in Sources */,
 				3FE6850F1885ADC400AEA2CD /* City.m in Sources */,

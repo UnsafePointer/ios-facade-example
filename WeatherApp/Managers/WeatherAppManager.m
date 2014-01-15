@@ -68,7 +68,16 @@ static dispatch_once_t oncePredicate;
 - (void)getCitiesWithCountry:(Country *)country
                   completion:(ArrayCompletionBlock)completion
 {
-    
+    [[self networkingHelper] getCitiesWithCountry:country completion:^(NSArray *array, NSError *error) {
+        if (!error) {
+            if (array) {
+                completion(array, nil);
+            }
+        }
+        else {
+            completion(nil, error);
+        }
+    }];
 }
 
 #pragma mark - CountriesStorage Protocol

@@ -10,4 +10,15 @@
 
 @implementation City
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+    return @{
+             @"name" : @"name",
+             @"lng" : @"lng",
+             @"lat" : @"lat"
+            };
+}
+
+
+
 @end
