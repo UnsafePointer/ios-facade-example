@@ -10,9 +10,13 @@
 
 @interface TranslatorHelper : NSObject
 
-- (id)translateObjectFromJSON:(NSDictionary *)JSON
+- (id)translateModelFromJSON:(NSDictionary *)JSON
                 withclassName:(NSString *)className;
 - (id)translateCollectionFromJSON:(NSDictionary *)JSON
                     withClassName:(NSString *)className;
+- (id)translateModelfromManagedObject:(NSManagedObject *)managedObject
+                        withClassName:(NSString *)className;
+- (id)translateCollectionfromManagedObjects:(NSArray *)managedObject
+                              withClassName:(NSString *)className;
 
 @end

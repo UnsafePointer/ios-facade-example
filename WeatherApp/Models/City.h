@@ -12,9 +12,9 @@
 
 @interface City : MTLModel <MTLJSONSerializing, MTLManagedObjectSerializing>
 
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSNumber *lat;
-@property (nonatomic, retain) NSNumber *lng;
-@property (nonatomic, retain) Country *country;
+@property (nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, copy, readonly) NSString *lat;
+@property (nonatomic, copy, readonly) NSString *lng;
+@property (nonatomic, copy, readwrite) Country *country;
 
 @end

@@ -11,7 +11,7 @@
 
 @implementation TranslatorHelper
 
-- (id)translateObjectFromJSON:(NSDictionary *)JSON
+- (id)translateModelFromJSON:(NSDictionary *)JSON
                 withclassName:(NSString *)className
 {
     NSParameterAssert(className != nil);
@@ -33,6 +33,36 @@
     if ([JSON isKindOfClass:[NSArray class]]) {
         NSValueTransformer *valueTransformer = [MTLValueTransformer mtl_JSONArrayTransformerWithModelClass:NSClassFromString(className)];
         NSArray *collection = [valueTransformer transformedValue:JSON];
+        return collection;
+    }
+    return nil;
+}
+
+- (id)translateModelfromManagedObject:(NSManagedObject *)managedObject
+                        withClassName:(NSString *)className
+{
+    NSParameterAssert(className != nil);
+    NSError *error = nil;
+    id model = [MTLManagedObjectAdapter modelOfClass:NSClassFromString(className)
+                                   fromManagedObject:managedObject
+                                               error:&error];
+    if (!error) {
+        return model;
+    } else {
+        return nil;
+    }
+}
+
+- (id)translateCollectionfromManagedObjects:(NSArray *)managedObjects
+                              withClassName:(NSString *)className
+{
+    NSParameterAssert(className != nil);
+    if ([managedObjects isKindOfClass:[NSArray class]]) {
+        NSMutableArray *collection = [NSMutableArray array];
+        for (NSManagedObject *managedObject in managedObjects) {
+            id model = [self translateModelfromManagedObject:managedObject withClassName:className];
+            [collection addObject:model];
+        }
         return collection;
     }
     return nil;

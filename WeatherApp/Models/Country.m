@@ -7,6 +7,7 @@
 //
 
 #import "Country.h"
+#import "City.h"
 
 @implementation Country
 
@@ -28,7 +29,13 @@
 }
 
 + (NSString *)managedObjectEntityName {
-    return @"Country";
+    return @"CountryManagedObject";
+}
+
++ (NSDictionary *)relationshipModelClassesByPropertyKey {
+    return @{
+             @"cities" : [City class]
+            };
 }
 
 @end

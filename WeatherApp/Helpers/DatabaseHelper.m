@@ -7,22 +7,57 @@
 //
 
 #import "DatabaseHelper.h"
-#import "MTLModel+FindAll.h"
 #import "City.h"
 #import "Country.h"
+#import "TranslatorHelper.h"
+#import "CountryManagedObject.h"
+#import "CityManagedObject.h"
 
 static const int ddLogLevel = LOG_LEVEL_INFO;
 
+@interface DatabaseHelper ()
+
+@property (nonatomic, strong) TranslatorHelper *translatorHelper;
+
+- (CountryManagedObject *)getCountryManagedObjectWithCountryCode:(NSString *)countryCode
+                                                       inContext:(NSManagedObjectContext *)context;
+
+@end
+
 @implementation DatabaseHelper
+{
+}
+
+#pragma mark - Lazy Loading Pattern
+
+- (TranslatorHelper *)translatorHelper
+{
+    if (_translatorHelper == nil) {
+        _translatorHelper = [[TranslatorHelper alloc] init];
+    }
+    return _translatorHelper;
+}
+
+#pragma mark - Private Methods
+
+- (CountryManagedObject *)getCountryManagedObjectWithCountryCode:(NSString *)countryCode
+                                                       inContext:(NSManagedObjectContext *)context
+{
+    return [CountryManagedObject MR_findFirstByAttribute:@"countryCode"
+                                               withValue:countryCode
+                                               inContext:context];
+}
 
 #pragma mark - CitiesFetcher Protocol
 
 - (void)getCitiesWithCountry:(Country *)country
                   completion:(ArrayCompletionBlock)completion
 {
-    NSArray *array = [City WA_findAllWithPredicate:[NSPredicate predicateWithFormat:@"country == %@", country]
-                                         inContext:[NSManagedObjectContext MR_defaultContext]];
-    completion(array, nil);
+    CountryManagedObject *countryManagedObject = [self getCountryManagedObjectWithCountryCode:country.countryCode inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    NSArray *array = [CityManagedObject MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"country == %@", countryManagedObject]
+                                                      inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    completion([[self translatorHelper] translateCollectionfromManagedObjects:array
+                                                                withClassName:@"City"], nil);
 }
 
 #pragma mark - CitiesStorage Protocol
@@ -30,13 +65,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)storeCities:(NSArray *)cities fromCountry:(Country *)country
 {
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-        [country addCities:[NSSet setWithArray:cities]];
+        CountryManagedObject *countryManagedObject = [self getCountryManagedObjectWithCountryCode:country.countryCode
+                                                                                        inContext:localContext];
         [cities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSError *error;
-            [((City *)obj) setCountry:country];
-            [MTLManagedObjectAdapter managedObjectFromModel:obj
-                                       insertingIntoContext:localContext
-                                                      error:&error];
+            CityManagedObject *cityManagedObject = [MTLManagedObjectAdapter managedObjectFromModel:obj
+                                                                              insertingIntoContext:localContext
+                                                                                             error:&error];
+            [cityManagedObject setCountry:countryManagedObject];
+            [countryManagedObject addCitiesObject:cityManagedObject];
         }];
     } completion:^(BOOL success, NSError *error) {
         if (success) {
@@ -52,8 +89,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
 {
-    NSArray *array = [Country WA_findAllInContext:[NSManagedObjectContext MR_defaultContext]];
-    completion(array, nil);
+    NSArray *array = [CountryManagedObject MR_findAllInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    completion([[self translatorHelper] translateCollectionfromManagedObjects:array
+                                                                withClassName:@"Country"], nil);
 }
 
 #pragma mark - CountriesStorage Protocol

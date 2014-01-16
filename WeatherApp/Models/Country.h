@@ -12,15 +12,6 @@
 
 @property (nonatomic, copy, readonly) NSString *countryName;
 @property (nonatomic, copy, readonly) NSString *countryCode;
-@property (nonatomic, copy, readonly) NSSet *cities;
-
-@end
-
-@interface Country (CoreDataGeneratedAccessors)
-
-- (void)addCitiesObject:(NSManagedObject *)value;
-- (void)removeCitiesObject:(NSManagedObject *)value;
-- (void)addCities:(NSSet *)values;
-- (void)removeCities:(NSSet *)values;
+@property (nonatomic, copy, readwrite) NSSet *cities;
 
 @end
