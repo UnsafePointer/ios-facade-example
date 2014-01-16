@@ -40,10 +40,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }];
     } completion:^(BOOL success, NSError *error) {
         if (success) {
-            DDLogInfo(@"Countries stored on database without errors");
+            DDLogInfo(@"Cities stored on database without errors");
         }
         else {
-            DDLogInfo(@"Countries failed to stored on database with Error %@", [error localizedDescription]);
+            DDLogInfo(@"Cities failed to stored on database with Error %@", [error localizedDescription]);
         }
     }];
 }

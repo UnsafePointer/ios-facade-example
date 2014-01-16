@@ -81,7 +81,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                 if ([array count] > 0) {
                     [[self cacheHelper] storeCities:array
                                         fromCountry:country];
-                    DDLogInfo(@"Contries retrieved from database");
+                    DDLogInfo(@"Cities retrieved from database");
                     completion(array, nil);
                 }
                 else {
