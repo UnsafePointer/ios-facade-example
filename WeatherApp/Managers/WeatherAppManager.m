@@ -69,24 +69,41 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)getCitiesWithCountry:(Country *)country
                   completion:(ArrayCompletionBlock)completion
 {
-    [[self cacheHelper] getCitiesWithCountry:country completion:^(NSArray *array, NSError *error) {
+    [[self cacheHelper] getCitiesWithCountry:country
+                                  completion:^(NSArray *array, NSError *error) {
         if (array) {
             DDLogInfo(@"Cities retrieved from memory");
             completion(array, nil);
         }
         else {
-            [[self networkingHelper] getCitiesWithCountry:country completion:^(NSArray *array, NSError *error) {
-                if (!error) {
-                    if (array) {
-                        [[self cacheHelper] storeCities:array fromCountry:country];
-                        DDLogInfo(@"Cities retrieved from network");
-                        completion(array, nil);
-                    }
+            [[self databaseHelper] getCitiesWithCountry:country
+                                             completion:^(NSArray *array, NSError *error) {
+                if ([array count] > 0) {
+                    [[self cacheHelper] storeCities:array
+                                        fromCountry:country];
+                    DDLogInfo(@"Contries retrieved from database");
+                    completion(array, nil);
                 }
                 else {
-                    completion(nil, error);
+                    [[self networkingHelper] getCitiesWithCountry:country
+                                                       completion:^(NSArray *array, NSError *error) {
+                        if (!error) {
+                            if (array) {
+                                [[self cacheHelper] storeCities:array
+                                                    fromCountry:country];
+                                [[self databaseHelper] storeCities:array
+                                                       fromCountry:country];
+                                DDLogInfo(@"Cities retrieved from network");
+                                completion(array, nil);
+                            }
+                        }
+                        else {
+                            completion(nil, error);
+                        }
+                    }];
                 }
             }];
+            
         }
     }];
 }

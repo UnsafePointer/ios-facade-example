@@ -22,10 +22,8 @@
 {
     return @{
              @"countryName" : @"countryName",
-             @"north" : @"north",
-             @"south" : @"south",
-             @"east" : @"east",
-             @"west" : @"west"
+             @"countryCode" : @"countryCode",
+             @"cities" : @"cities"
             };
 }
 

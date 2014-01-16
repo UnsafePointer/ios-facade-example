@@ -2,7 +2,7 @@
 //  City.m
 //  WeatherApp
 //
-//  Created by Renzo Crisóstomo on 1/14/14.
+//  Created by Renzo Crisóstomo on 1/16/14.
 //  Copyright (c) 2014 Ruenzuo. All rights reserved.
 //
 
@@ -14,11 +14,23 @@
 {
     return @{
              @"name" : @"name",
-             @"lng" : @"lng",
-             @"lat" : @"lat"
+             @"lat" : @"lat",
+             @"lng" : @"lng"
             };
 }
 
++ (NSDictionary *)managedObjectKeysByPropertyKey
+{
+    return @{
+             @"name" : @"name",
+             @"lat" : @"lat",
+             @"lng" : @"lng",
+             @"Country" : @"Country"
+            };
+}
 
++ (NSString *)managedObjectEntityName {
+    return @"City";
+}
 
 @end
