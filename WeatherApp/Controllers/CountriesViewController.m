@@ -10,6 +10,7 @@
 #import "CitiesViewController.h"
 #import "WeatherAppManager.h"
 #import "Country.h"
+#include <mach/mach_time.h>
 
 @interface CountriesViewController ()
 
@@ -49,9 +50,25 @@
 
 #pragma mark - IBAction
 
+/*
+ Benchmarking method copied from Peter Steinberger's PSPDFPerformAndTrackTime available here: https://github.com/steipete/PSTFoundationBenchmark
+ */
+
 - (IBAction)onRefreshControlValueChanged:(id)sender
 {
+    uint64_t startTime = mach_absolute_time();
     [[WeatherAppManager sharedManager] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+        uint64_t endTime = mach_absolute_time();
+        uint64_t elapsedTime = endTime - startTime;
+        static double ticksToNanoseconds = 0.0;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            mach_timebase_info_data_t timebase;
+            mach_timebase_info(&timebase);
+            ticksToNanoseconds = (double)timebase.numer / timebase.denom;
+        });
+        double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
+        NSLog(@"Execution time: %f [ms]", elapsedTimeInNanoseconds/1E6);
         if (!error) {
             if (array) {
                 [self.countries removeAllObjects];
