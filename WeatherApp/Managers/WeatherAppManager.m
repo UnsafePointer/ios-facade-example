@@ -11,6 +11,7 @@
 #import "NetworkingHelper.h"
 #import "CacheHelper.h"
 #import "DatabaseHelper.h"
+#import "ModelUtils.h"
 
 @interface WeatherAppManager ()
 
@@ -89,12 +90,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                        completion:^(NSArray *array, NSError *error) {
                         if (!error) {
                             if (array) {
-                                [[self cacheHelper] storeCities:array
+                                NSArray *sortedArray = [ModelUtils sortCities:array];
+                                [ModelUtils relateCities:sortedArray
+                                             withCountry:country];
+                                [[self cacheHelper] storeCities:sortedArray
                                                     fromCountry:country];
-                                [[self databaseHelper] storeCities:array
+                                [[self databaseHelper] storeCities:sortedArray
                                                        fromCountry:country];
                                 DDLogInfo(@"Cities retrieved from network");
-                                completion(array, nil);
+                                completion(sortedArray, nil);
                             }
                         }
                         else {
@@ -128,10 +132,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                     [[self networkingHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
                         if (!error) {
                             if (array) {
-                                [[self cacheHelper] storeCountries:array];
-                                [[self databaseHelper] storeCountries:array];
+                                NSArray *sortedArray = [ModelUtils sortCountries:array];
+                                [[self cacheHelper] storeCountries:sortedArray];
+                                [[self databaseHelper] storeCountries:sortedArray];
                                 DDLogInfo(@"Contries retrieved from network");
-                                completion(array, nil);
+                                completion(sortedArray, nil);
                             }
                         }
                         else {

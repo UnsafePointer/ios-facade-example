@@ -9,7 +9,7 @@
     <entity name="CountryManagedObject" representedClassName="" syncable="YES">
         <attribute name="countryCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="countryName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="cities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CityManagedObject" inverseName="country" inverseEntity="CityManagedObject" syncable="YES"/>
+        <relationship name="cities" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CityManagedObject" inverseName="country" inverseEntity="CityManagedObject" syncable="YES"/>
     </entity>
     <elements>
         <element name="CityManagedObject" positionX="0" positionY="0" width="128" height="103"/>

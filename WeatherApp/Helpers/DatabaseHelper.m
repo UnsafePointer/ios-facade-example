@@ -53,16 +53,20 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)getCitiesWithCountry:(Country *)country
                   completion:(ArrayCompletionBlock)completion
 {
-    CountryManagedObject *countryManagedObject = [self getCountryManagedObjectWithCountryCode:country.countryCode inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-    NSArray *array = [CityManagedObject MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"country == %@", countryManagedObject]
-                                                      inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    CountryManagedObject *countryManagedObject = [self getCountryManagedObjectWithCountryCode:country.countryCode
+                                                                                    inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    NSArray *array = [CityManagedObject MR_findAllSortedBy:@"name"
+                                                 ascending:YES
+                                             withPredicate:[NSPredicate predicateWithFormat:@"country == %@", countryManagedObject]
+                                                 inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     completion([[self translatorHelper] translateCollectionfromManagedObjects:array
                                                                 withClassName:@"City"], nil);
 }
 
 #pragma mark - CitiesStorage Protocol
 
-- (void)storeCities:(NSArray *)cities fromCountry:(Country *)country
+- (void)storeCities:(NSArray *)cities
+        fromCountry:(Country *)country
 {
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         CountryManagedObject *countryManagedObject = [self getCountryManagedObjectWithCountryCode:country.countryCode
@@ -73,7 +77,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                                               insertingIntoContext:localContext
                                                                                              error:&error];
             [cityManagedObject setCountry:countryManagedObject];
-            [countryManagedObject addCitiesObject:cityManagedObject];
+            [countryManagedObject addCitiesObject:cityManagedObject]; 
         }];
     } completion:^(BOOL success, NSError *error) {
         if (success) {
@@ -89,7 +93,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
 {
-    NSArray *array = [CountryManagedObject MR_findAllInContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+    NSArray *array = [CountryManagedObject MR_findAllSortedBy:@"countryName"
+                                                    ascending:YES
+                                                    inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     completion([[self translatorHelper] translateCollectionfromManagedObjects:array
                                                                 withClassName:@"Country"], nil);
 }

@@ -12,6 +12,6 @@
 
 @property (nonatomic, copy, readonly) NSString *countryName;
 @property (nonatomic, copy, readonly) NSString *countryCode;
-@property (nonatomic, copy, readwrite) NSSet *cities;
+@property (nonatomic, copy, readwrite) NSOrderedSet *cities;
 
 @end

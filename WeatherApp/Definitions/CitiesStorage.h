@@ -12,6 +12,7 @@
 
 @protocol CitiesStorage <NSObject>
 
-- (void)storeCities:(NSArray *)cities fromCountry:(Country *)country;
+- (void)storeCities:(NSArray *)cities
+        fromCountry:(Country *)country;
 
 @end

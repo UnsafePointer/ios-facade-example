@@ -15,14 +15,20 @@
 
 @property (nonatomic, retain) NSString *countryCode;
 @property (nonatomic, retain) NSString *countryName;
-@property (nonatomic, retain) NSSet *cities;
+@property (nonatomic, retain) NSOrderedSet *cities;
 @end
 
 @interface CountryManagedObject (CoreDataGeneratedAccessors)
 
+- (void)insertObject:(CityManagedObject *)value inCitiesAtIndex:(NSUInteger)idx;
+- (void)removeObjectFromCitiesAtIndex:(NSUInteger)idx;
+- (void)insertCities:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
+- (void)removeCitiesAtIndexes:(NSIndexSet *)indexes;
+- (void)replaceObjectInCitiesAtIndex:(NSUInteger)idx withObject:(CityManagedObject *)value;
+- (void)replaceCitiesAtIndexes:(NSIndexSet *)indexes withCities:(NSArray *)values;
 - (void)addCitiesObject:(CityManagedObject *)value;
 - (void)removeCitiesObject:(CityManagedObject *)value;
-- (void)addCities:(NSSet *)values;
-- (void)removeCities:(NSSet *)values;
+- (void)addCities:(NSOrderedSet *)values;
+- (void)removeCities:(NSOrderedSet *)values;
 
 @end
