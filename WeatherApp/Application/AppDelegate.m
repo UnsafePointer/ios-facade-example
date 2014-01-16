@@ -21,6 +21,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     [[[TMCache sharedCache] memoryCache] setCostLimit:MEMORY_CACHE_COST_LIMIT];
     [MagicalRecord setupAutoMigratingCoreDataStack];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
+                                                         diskCapacity:20 * 1024 * 1024
+                                                             diskPath:nil];
+    [NSURLCache setSharedURLCache:URLCache];
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     return YES;
