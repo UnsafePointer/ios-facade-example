@@ -164,7 +164,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
 }
 
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+- (void)motionEnded:(UIEventSubtype)motion
+          withEvent:(UIEvent *)event
 {
     if (motion == UIEventSubtypeMotionShake) {
         [self testDataSource];

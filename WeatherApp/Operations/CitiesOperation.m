@@ -57,6 +57,10 @@
         if (self.isCancelled)
             return;
         
+        if ([_country.cities count] > 0) {
+            return;
+        }
+        
         NSString *URL = [NSString stringWithFormat:@"http://api.geonames.org/searchJSON?country=%@&username=WeatherApp", _country.countryCode];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setURL:[NSURL URLWithString:URL]];
