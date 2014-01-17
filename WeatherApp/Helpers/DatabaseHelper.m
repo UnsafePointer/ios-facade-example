@@ -12,7 +12,6 @@
 #import "TranslatorHelper.h"
 #import "CountryManagedObject.h"
 #import "CityManagedObject.h"
-#import "CountryManagedObject+Fixes.h"
 
 static const int ddLogLevel = LOG_LEVEL_INFO;
 

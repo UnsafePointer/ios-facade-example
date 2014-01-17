@@ -10,7 +10,6 @@
 		3F1DB16718884F80005C9C17 /* ModelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DB16618884F80005C9C17 /* ModelUtils.m */; };
 		3F1DB16F188850F1005C9C17 /* CityManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DB16C188850F1005C9C17 /* CityManagedObject.m */; };
 		3F1DB170188850F1005C9C17 /* CountryManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DB16E188850F1005C9C17 /* CountryManagedObject.m */; };
-		3F1DB17918886ED1005C9C17 /* CountryManagedObject+Fixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DB17818886ED1005C9C17 /* CountryManagedObject+Fixes.m */; };
 		3F21106218884E1C00CE428E /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F21106118884E1C00CE428E /* Station.m */; };
 		3F294ED8188984910013C51D /* CitiesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F294ED7188984910013C51D /* CitiesOperation.m */; };
 		3FC1CB09188800EE00845D9C /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1CB08188800EE00845D9C /* City.m */; };
@@ -57,8 +56,6 @@
 		3F1DB16C188850F1005C9C17 /* CityManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CityManagedObject.m; path = Models/CityManagedObject.m; sourceTree = "<group>"; };
 		3F1DB16D188850F1005C9C17 /* CountryManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountryManagedObject.h; path = Models/CountryManagedObject.h; sourceTree = "<group>"; };
 		3F1DB16E188850F1005C9C17 /* CountryManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountryManagedObject.m; path = Models/CountryManagedObject.m; sourceTree = "<group>"; };
-		3F1DB17718886ED1005C9C17 /* CountryManagedObject+Fixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CountryManagedObject+Fixes.h"; path = "Extensions/CountryManagedObject+Fixes.h"; sourceTree = "<group>"; };
-		3F1DB17818886ED1005C9C17 /* CountryManagedObject+Fixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CountryManagedObject+Fixes.m"; path = "Extensions/CountryManagedObject+Fixes.m"; sourceTree = "<group>"; };
 		3F21106018884E1C00CE428E /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Station.h; path = Models/Station.h; sourceTree = "<group>"; };
 		3F21106118884E1C00CE428E /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Station.m; path = Models/Station.m; sourceTree = "<group>"; };
 		3F294ED6188984910013C51D /* CitiesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CitiesOperation.h; path = Operations/CitiesOperation.h; sourceTree = "<group>"; };
@@ -144,15 +141,6 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		3F1DB17618886EA6005C9C17 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				3F1DB17718886ED1005C9C17 /* CountryManagedObject+Fixes.h */,
-				3F1DB17818886ED1005C9C17 /* CountryManagedObject+Fixes.m */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
 		3F294ED5188983F50013C51D /* Operations */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,7 +188,6 @@
 				3FC6F77A18859468009D48CB /* Application */,
 				3FE6850418859A0000AEA2CD /* Controllers */,
 				3FE6851C1885BAF800AEA2CD /* Definitions */,
-				3F1DB17618886EA6005C9C17 /* Extensions */,
 				3FE685181885B71E00AEA2CD /* Helpers */,
 				3FE685111885B6A500AEA2CD /* Managers */,
 				3FE685021885996C00AEA2CD /* Models */,
@@ -475,7 +462,6 @@
 				3FC1CB09188800EE00845D9C /* City.m in Sources */,
 				3FC6F77D18859472009D48CB /* AppDelegate.m in Sources */,
 				3FE685171885B6EE00AEA2CD /* WeatherAppManager.m in Sources */,
-				3F1DB17918886ED1005C9C17 /* CountryManagedObject+Fixes.m in Sources */,
 				3FE6850C18859B3800AEA2CD /* CountriesViewController.m in Sources */,
 				3FDA2BF81886F1AE001790F8 /* CitiesViewController.m in Sources */,
 				3F1DB170188850F1005C9C17 /* CountryManagedObject.m in Sources */,
