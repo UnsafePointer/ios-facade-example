@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) NSMutableArray *cities;
 
+- (void)checkIfCountryHasCities;
+
 @end
 
 @implementation CitiesViewController
@@ -30,11 +32,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self checkIfCountryHasCities];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Private Methods
+
+- (void)checkIfCountryHasCities
+{
+    if ([_country.cities count] > 0) {
+        [self.cities removeAllObjects];
+        [self.cities addObjectsFromArray:_country.cities];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }
 }
 
 #pragma mark - IBAction
@@ -46,10 +62,14 @@
             if (array) {
                 [self.cities removeAllObjects];
                 [self.cities addObjectsFromArray:array];
-                [self.tableView reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
             }
         }
-        [[self refreshControl] endRefreshing];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self refreshControl] endRefreshing];
+        });
     }];
 }
 

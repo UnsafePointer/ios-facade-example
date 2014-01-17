@@ -12,9 +12,13 @@
 #import "Country.h"
 #include <mach/mach_time.h>
 
+static const int ddLogLevel = LOG_LEVEL_INFO;
+
 @interface CountriesViewController ()
 
 @property (nonatomic, strong) NSMutableArray *countries;
+
+- (void)loadCountries;
 
 @end
 
@@ -32,6 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self loadCountries];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,7 +51,25 @@
         NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
         Country *country = [_countries objectAtIndex:selectedIndexPath.row];
         viewController.country = country;
-    }}
+    }
+}
+
+#pragma mark - Private Methods
+
+- (void)loadCountries
+{
+    [[WeatherAppManager sharedManager] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+        if (!error) {
+            if (array) {
+                [self.countries removeAllObjects];
+                [self.countries addObjectsFromArray:array];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }
+        }
+    }];
+}
 
 #pragma mark - IBAction
 
@@ -68,15 +91,19 @@
             ticksToNanoseconds = (double)timebase.numer / timebase.denom;
         });
         double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
-        NSLog(@"Execution time: %f [ms]", elapsedTimeInNanoseconds/1E6);
+        DDLogInfo(@"Execution time: %f [ms]", elapsedTimeInNanoseconds/1E6);
         if (!error) {
             if (array) {
                 [self.countries removeAllObjects];
                 [self.countries addObjectsFromArray:array];
-                [self.tableView reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
             }
         }
-        [[self refreshControl] endRefreshing];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self refreshControl] endRefreshing];
+        });
     }];
 }
 

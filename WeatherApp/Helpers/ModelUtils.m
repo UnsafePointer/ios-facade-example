@@ -18,7 +18,7 @@
     for (City *city in cities) {
         [city setCountry:country];
     }
-    [country setCities:[NSOrderedSet orderedSetWithArray:cities]];
+    [country setCities:cities];
 }
 
 + (NSArray *)sortCountries:(NSArray *)countries
