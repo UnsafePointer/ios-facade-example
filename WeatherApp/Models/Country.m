@@ -28,14 +28,21 @@
             };
 }
 
-+ (NSString *)managedObjectEntityName {
++ (NSString *)managedObjectEntityName
+{
     return @"CountryManagedObject";
 }
 
-+ (NSDictionary *)relationshipModelClassesByPropertyKey {
++ (NSDictionary *)relationshipModelClassesByPropertyKey
+{
     return @{
              @"cities" : [City class]
             };
+}
+
++ (NSSet *)propertyKeysForManagedObjectUniquing
+{
+    return [NSSet setWithObject:@"countryCode"];
 }
 
 @end

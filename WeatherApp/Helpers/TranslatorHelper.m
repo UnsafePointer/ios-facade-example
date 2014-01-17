@@ -60,7 +60,8 @@
     if ([managedObjects isKindOfClass:[NSArray class]]) {
         NSMutableArray *collection = [NSMutableArray array];
         for (NSManagedObject *managedObject in managedObjects) {
-            id model = [self translateModelfromManagedObject:managedObject withClassName:className];
+            id model = [self translateModelfromManagedObject:managedObject
+                                               withClassName:className];
             [collection addObject:model];
         }
         return collection;

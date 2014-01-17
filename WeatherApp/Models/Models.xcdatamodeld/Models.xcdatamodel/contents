@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="CityManagedObject" representedClassName="" syncable="YES">
+    <entity name="CityManagedObject" representedClassName="CityManagedObject" syncable="YES">
         <attribute name="lat" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lng" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CountryManagedObject" inverseName="cities" inverseEntity="CountryManagedObject" syncable="YES"/>
     </entity>
-    <entity name="CountryManagedObject" representedClassName="" syncable="YES">
+    <entity name="CountryManagedObject" representedClassName="CountryManagedObject" syncable="YES">
         <attribute name="countryCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="countryName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="cities" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CityManagedObject" inverseName="country" inverseEntity="CityManagedObject" syncable="YES"/>

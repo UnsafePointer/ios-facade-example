@@ -12,6 +12,7 @@
 #import "TranslatorHelper.h"
 #import "CountryManagedObject.h"
 #import "CityManagedObject.h"
+#import "CountryManagedObject+Fixes.h"
 
 static const int ddLogLevel = LOG_LEVEL_INFO;
 
@@ -69,15 +70,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         fromCountry:(Country *)country
 {
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-        CountryManagedObject *countryManagedObject = [self getCountryManagedObjectWithCountryCode:country.countryCode
-                                                                                        inContext:localContext];
         [cities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSError *error;
-            CityManagedObject *cityManagedObject = [MTLManagedObjectAdapter managedObjectFromModel:obj
-                                                                              insertingIntoContext:localContext
-                                                                                             error:&error];
-            [cityManagedObject setCountry:countryManagedObject];
-            [countryManagedObject addCitiesObject:cityManagedObject]; 
+            [MTLManagedObjectAdapter managedObjectFromModel:obj
+                                       insertingIntoContext:localContext
+                                                      error:&error];
         }];
     } completion:^(BOOL success, NSError *error) {
         if (success) {
