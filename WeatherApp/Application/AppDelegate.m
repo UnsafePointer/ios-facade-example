@@ -18,6 +18,7 @@
 -           (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UIApplication sharedApplication] setApplicationSupportsShakeToEdit:YES];
     [[[TMCache sharedCache] memoryCache] setCostLimit:MEMORY_CACHE_COST_LIMIT];
     [MagicalRecord setupAutoMigratingCoreDataStack];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];

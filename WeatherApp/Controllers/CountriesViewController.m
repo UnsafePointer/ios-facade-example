@@ -10,6 +10,7 @@
 #import "CitiesViewController.h"
 #import "WeatherAppManager.h"
 #import "Country.h"
+#import "City.h"
 #include <mach/mach_time.h>
 
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -19,6 +20,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (nonatomic, strong) NSMutableArray *countries;
 
 - (void)loadCountries;
+
+@end
+
+@interface CountriesViewController (Testing)
+
+- (void)testDataSource;
 
 @end
 
@@ -52,6 +59,23 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         Country *country = [_countries objectAtIndex:selectedIndexPath.row];
         viewController.country = country;
     }
+}
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self resignFirstResponder];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Private Methods
@@ -125,6 +149,26 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     Country *country = [_countries objectAtIndex:indexPath.row];
     cell.textLabel.text = country.countryName;
     return cell;
+}
+
+#pragma mark - Testing
+
+- (void)testDataSource
+{
+    NSLog(@"Total countries: %d", [_countries count]);
+    for (Country *country in _countries) {
+        NSLog(@"Total cities: %d", [country.cities count]);
+        for (City *city in country.cities) {
+            
+        }
+    }
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    if (motion == UIEventSubtypeMotionShake) {
+        [self testDataSource];
+    }
 }
 
 @end
