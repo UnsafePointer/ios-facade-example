@@ -13,5 +13,6 @@
 @interface WeatherAppManager : NSObject <CitiesFetcher, CountriesFetcher>
 
 + (WeatherAppManager *)sharedManager;
+- (void)startBackgroundCitiesFetchingWithCountries:(NSArray *)countries;
 
 @end

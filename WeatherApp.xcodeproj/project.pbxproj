@@ -12,6 +12,7 @@
 		3F1DB170188850F1005C9C17 /* CountryManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DB16E188850F1005C9C17 /* CountryManagedObject.m */; };
 		3F1DB17918886ED1005C9C17 /* CountryManagedObject+Fixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DB17818886ED1005C9C17 /* CountryManagedObject+Fixes.m */; };
 		3F21106218884E1C00CE428E /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F21106118884E1C00CE428E /* Station.m */; };
+		3F294ED8188984910013C51D /* CitiesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F294ED7188984910013C51D /* CitiesOperation.m */; };
 		3FC1CB09188800EE00845D9C /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1CB08188800EE00845D9C /* City.m */; };
 		3FC6F74318859381009D48CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC6F74218859381009D48CB /* Foundation.framework */; };
 		3FC6F74518859381009D48CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC6F74418859381009D48CB /* CoreGraphics.framework */; };
@@ -60,6 +61,8 @@
 		3F1DB17818886ED1005C9C17 /* CountryManagedObject+Fixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CountryManagedObject+Fixes.m"; path = "Extensions/CountryManagedObject+Fixes.m"; sourceTree = "<group>"; };
 		3F21106018884E1C00CE428E /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Station.h; path = Models/Station.h; sourceTree = "<group>"; };
 		3F21106118884E1C00CE428E /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Station.m; path = Models/Station.m; sourceTree = "<group>"; };
+		3F294ED6188984910013C51D /* CitiesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CitiesOperation.h; path = Operations/CitiesOperation.h; sourceTree = "<group>"; };
+		3F294ED7188984910013C51D /* CitiesOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesOperation.m; path = Operations/CitiesOperation.m; sourceTree = "<group>"; };
 		3F380DF718871C3D00BAEC2F /* CitiesStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CitiesStorage.h; path = Definitions/CitiesStorage.h; sourceTree = "<group>"; };
 		3FC1CB07188800EE00845D9C /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = City.h; path = Models/City.h; sourceTree = "<group>"; };
 		3FC1CB08188800EE00845D9C /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = City.m; path = Models/City.m; sourceTree = "<group>"; };
@@ -150,6 +153,15 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		3F294ED5188983F50013C51D /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				3F294ED6188984910013C51D /* CitiesOperation.h */,
+				3F294ED7188984910013C51D /* CitiesOperation.m */,
+			);
+			name = Operations;
+			sourceTree = "<group>";
+		};
 		3FC6F73618859381009D48CB = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +204,7 @@
 				3FE685181885B71E00AEA2CD /* Helpers */,
 				3FE685111885B6A500AEA2CD /* Managers */,
 				3FE685021885996C00AEA2CD /* Models */,
+				3F294ED5188983F50013C51D /* Operations */,
 				3F1DB171188852ED005C9C17 /* Utils */,
 				3FE68503188599FB00AEA2CD /* Views */,
 				3FC6F7781885945B009D48CB /* Images.xcassets */,
@@ -454,6 +467,7 @@
 			files = (
 				3FDA2BE41886C074001790F8 /* CacheHelper.m in Sources */,
 				3F1DB16718884F80005C9C17 /* ModelUtils.m in Sources */,
+				3F294ED8188984910013C51D /* CitiesOperation.m in Sources */,
 				3FDA2BE71886CFCF001790F8 /* Models.xcdatamodeld in Sources */,
 				3FE685241885C64200AEA2CD /* Country.m in Sources */,
 				3FDA2BF11886E301001790F8 /* DatabaseHelper.m in Sources */,

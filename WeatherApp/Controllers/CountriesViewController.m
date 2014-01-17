@@ -63,6 +63,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
             if (array) {
                 [self.countries removeAllObjects];
                 [self.countries addObjectsFromArray:array];
+                [[WeatherAppManager sharedManager] startBackgroundCitiesFetchingWithCountries:array];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.tableView reloadData];
                 });

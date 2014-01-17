@@ -12,12 +12,16 @@
 #import "CacheHelper.h"
 #import "DatabaseHelper.h"
 #import "ModelUtils.h"
+#import "CitiesOperation.h"
+#import "Country.h"
 
 @interface WeatherAppManager ()
 
 @property (nonatomic, strong) NetworkingHelper *networkingHelper;
 @property (nonatomic, strong) CacheHelper *cacheHelper;
 @property (nonatomic, strong) DatabaseHelper *databaseHelper;
+@property (nonatomic, strong) NSMutableSet *currentCitiesOperations;
+@property (nonatomic, strong) NSOperationQueue *citiesOperationQueue;
 
 @end
 
@@ -54,6 +58,22 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return _databaseHelper;
 }
 
+- (NSMutableSet *)currentCitiesOperations {
+    if (!_currentCitiesOperations) {
+        _currentCitiesOperations = [[NSMutableSet alloc] init];
+    }
+    return _currentCitiesOperations;
+}
+
+- (NSOperationQueue *)citiesOperationQueue {
+    if (!_citiesOperationQueue) {
+        _citiesOperationQueue = [[NSOperationQueue alloc] init];
+        _citiesOperationQueue.name = @"Cities Operation Queue";
+        _citiesOperationQueue.maxConcurrentOperationCount = 3;
+    }
+    return _citiesOperationQueue;
+}
+
 #pragma mark - Class Methods
 
 + (WeatherAppManager *)sharedManager
@@ -63,6 +83,26 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         _sharedManager = [[self alloc] init];
     });
     return _sharedManager;
+}
+
+#pragma mark - Private Methods
+
+- (void)startBackgroundCitiesFetchingWithCountries:(NSArray *)countries
+{
+    for (Country *country in countries) {
+        if (![[self currentCitiesOperations] containsObject:country]) {
+            CitiesOperation *operation = [[CitiesOperation alloc] initWithCountry:country];
+            [[self currentCitiesOperations] addObject:country.countryCode];
+            [[self citiesOperationQueue] addOperation:operation];
+        }   
+    }
+}
+
+#pragma mark - CitiesOperationDelegate
+
+- (void)citiesOperationDidFinish:(CitiesOperation *)operation
+{
+    [[self currentCitiesOperations] removeObject:operation.country.countryCode];
 }
 
 #pragma mark - CitiesFetcher Protocol
