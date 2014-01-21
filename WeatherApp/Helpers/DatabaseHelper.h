@@ -12,6 +12,11 @@
 #import "CitiesFetcher.h"
 #import "CitiesStorage.h"
 
+@class CountryManagedObject;
+
 @interface DatabaseHelper : NSObject <CountriesFetcher, CountriesStorage, CitiesFetcher, CitiesStorage>
+
+- (CountryManagedObject *)getCountryManagedObjectWithCountryCode:(NSString *)countryCode
+                                                       inContext:(NSManagedObjectContext *)context;
 
 @end

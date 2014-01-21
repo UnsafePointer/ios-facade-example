@@ -9,12 +9,13 @@
 #import "CitiesViewController.h"
 #import "WeatherAppManager.h"
 #import "City.h"
+#include <mach/mach_time.h>
+
+static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @interface CitiesViewController ()
 
 @property (nonatomic, strong) NSMutableArray *cities;
-
-- (void)checkIfCountryHasCities;
 
 @end
 
@@ -32,7 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self checkIfCountryHasCities];
+    [self loadCities];
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,15 +43,36 @@
 
 #pragma mark - Private Methods
 
-- (void)checkIfCountryHasCities
+/*
+ Benchmarking method copied from Peter Steinberger's PSPDFPerformAndTrackTime available here: https://github.com/steipete/PSTFoundationBenchmark
+ */
+
+- (void)loadCities
 {
-    if ([_country.cities count] > 0) {
-        [self.cities removeAllObjects];
-        [self.cities addObjectsFromArray:_country.cities];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-    }
+    uint64_t startTime = mach_absolute_time();
+    [[WeatherAppManager sharedManager] getCitiesWithCountry:_country
+                                                 completion:^(NSArray *array, NSError *error) {
+                                                     uint64_t endTime = mach_absolute_time();
+                                                     uint64_t elapsedTime = endTime - startTime;
+                                                     static double ticksToNanoseconds = 0.0;
+                                                     static dispatch_once_t onceToken;
+                                                     dispatch_once(&onceToken, ^{
+                                                         mach_timebase_info_data_t timebase;
+                                                         mach_timebase_info(&timebase);
+                                                         ticksToNanoseconds = (double)timebase.numer / timebase.denom;
+                                                     });
+                                                     double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
+                                                     DDLogInfo(@"Execution time: %f [ms]", elapsedTimeInNanoseconds/1E6);
+                                                     if (!error) {
+                                                         if (array) {
+                                                             [self.cities removeAllObjects];
+                                                             [self.cities addObjectsFromArray:array];
+                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                 [self.tableView reloadData];
+                                                             });
+                                                         }
+                                                     }
+                                                 }];
 }
 
 #pragma mark - IBAction

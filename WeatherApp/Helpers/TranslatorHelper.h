@@ -16,7 +16,7 @@
                     withClassName:(NSString *)className;
 - (id)translateModelfromManagedObject:(NSManagedObject *)managedObject
                         withClassName:(NSString *)className;
-- (id)translateCollectionfromManagedObjects:(NSArray *)managedObject
+- (id)translateCollectionfromManagedObjects:(NSArray *)managedObjects
                               withClassName:(NSString *)className;
 
 @end

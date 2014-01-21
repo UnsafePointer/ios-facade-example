@@ -8,13 +8,10 @@
 
 #import <Mantle/Mantle.h>
 
-@class Country;
-
 @interface City : MTLModel <MTLJSONSerializing, MTLManagedObjectSerializing>
 
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *lat;
 @property (nonatomic, copy, readonly) NSString *lng;
-@property (nonatomic, copy, readwrite) Country *country;
 
 @end

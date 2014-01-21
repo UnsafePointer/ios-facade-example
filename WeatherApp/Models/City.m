@@ -26,18 +26,12 @@
              @"name" : @"name",
              @"lat" : @"lat",
              @"lng" : @"lng",
-             @"country" : @"country"
             };
 }
 
-+ (NSString *)managedObjectEntityName {
++ (NSString *)managedObjectEntityName
+{
     return @"CityManagedObject";
-}
-
-+ (NSDictionary *)relationshipModelClassesByPropertyKey {
-    return @{
-             @"country" : [Country class]
-            };
 }
 
 @end

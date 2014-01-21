@@ -12,8 +12,6 @@
 
 @interface ModelUtils : NSObject
 
-+ (void)relateCities:(NSArray *)cities
-         withCountry:(Country *)country;
 + (NSArray *)sortCountries:(NSArray *)countries;
 + (NSArray *)sortCities:(NSArray *)cities;
 

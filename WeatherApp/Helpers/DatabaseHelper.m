@@ -12,15 +12,14 @@
 #import "TranslatorHelper.h"
 #import "CountryManagedObject.h"
 #import "CityManagedObject.h"
+#import "CountryManagedObject+Fixes.h"
+#import "NSManagedObjectContext+BackgroundFetch.h"
 
 static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @interface DatabaseHelper ()
 
 @property (nonatomic, strong) TranslatorHelper *translatorHelper;
-
-- (CountryManagedObject *)getCountryManagedObjectWithCountryCode:(NSString *)countryCode
-                                                       inContext:(NSManagedObjectContext *)context;
 
 @end
 
@@ -38,7 +37,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return _translatorHelper;
 }
 
-#pragma mark - Private Methods
+#pragma mark - Public Methods
 
 - (CountryManagedObject *)getCountryManagedObjectWithCountryCode:(NSString *)countryCode
                                                        inContext:(NSManagedObjectContext *)context
@@ -55,12 +54,23 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     CountryManagedObject *countryManagedObject = [self getCountryManagedObjectWithCountryCode:country.countryCode
                                                                                     inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-    NSArray *array = [CityManagedObject MR_findAllSortedBy:@"name"
-                                                 ascending:YES
-                                             withPredicate:[NSPredicate predicateWithFormat:@"country == %@", countryManagedObject]
-                                                 inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-    completion([[self translatorHelper] translateCollectionfromManagedObjects:array
-                                                                withClassName:@"City"], nil);
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"CityManagedObject"];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+                                                                   ascending:YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"country == %@", countryManagedObject];
+    [fetchRequest setPredicate:predicate];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
+    [context executeFetchRequest:fetchRequest
+                      completion:^(NSArray *array, NSError *error) {
+                          if (array) {
+                              completion([[self translatorHelper] translateCollectionfromManagedObjects:array
+                                                                                          withClassName:@"City"], nil);
+                          }
+                          else {
+                              completion(nil, error);
+                          }
+                      }];
 }
 
 #pragma mark - CitiesStorage Protocol
@@ -69,11 +79,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         fromCountry:(Country *)country
 {
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+        CountryManagedObject *countryManagedObject = [self getCountryManagedObjectWithCountryCode:country.countryCode
+                                                                                        inContext:localContext];
         [cities enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSError *error;
-            [MTLManagedObjectAdapter managedObjectFromModel:obj
-                                       insertingIntoContext:localContext
-                                                      error:&error];
+            CityManagedObject *cityManagedObject = [MTLManagedObjectAdapter managedObjectFromModel:obj
+                                                                              insertingIntoContext:localContext
+                                                                                             error:&error];
+            [cityManagedObject setCountry:countryManagedObject];
+            [countryManagedObject addCitiesObject:cityManagedObject];
         }];
     } completion:^(BOOL success, NSError *error) {
         if (success) {
@@ -89,11 +103,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
 {
-    NSArray *array = [CountryManagedObject MR_findAllSortedBy:@"countryName"
-                                                    ascending:YES
-                                                    inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
-    completion([[self translatorHelper] translateCollectionfromManagedObjects:array
-                                                                withClassName:@"Country"], nil);
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"CountryManagedObject"];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"countryName"
+                                                                   ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    NSManagedObjectContext *context = [NSManagedObjectContext MR_contextForCurrentThread];
+    [context executeFetchRequest:fetchRequest
+                      completion:^(NSArray *array, NSError *error) {
+                          if (array) {
+                              completion([[self translatorHelper] translateCollectionfromManagedObjects:array
+                                                                                          withClassName:@"Country"], nil);
+                          }
+                          else {
+                              completion(nil, error);
+                          }
+                      }];
 }
 
 #pragma mark - CountriesStorage Protocol

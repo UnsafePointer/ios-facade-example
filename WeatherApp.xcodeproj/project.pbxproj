@@ -36,6 +36,8 @@
 		3FE685171885B6EE00AEA2CD /* WeatherAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE685161885B6EE00AEA2CD /* WeatherAppManager.m */; };
 		3FE6851B1885B9B600AEA2CD /* NetworkingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE6851A1885B9B600AEA2CD /* NetworkingHelper.m */; };
 		3FE685241885C64200AEA2CD /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE685231885C64200AEA2CD /* Country.m */; };
+		3FF5DE90188EACCE004F275D /* CountryManagedObject+Fixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5DE8F188EACCE004F275D /* CountryManagedObject+Fixes.m */; };
+		3FF5DE93188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5DE92188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m */; };
 		E56CA4BD26154E279309C175 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE92C69A36A446797C4099F /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +105,10 @@
 		3FE6851A1885B9B600AEA2CD /* NetworkingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkingHelper.m; path = Helpers/NetworkingHelper.m; sourceTree = "<group>"; };
 		3FE685221885C64200AEA2CD /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Country.h; path = Models/Country.h; sourceTree = "<group>"; };
 		3FE685231885C64200AEA2CD /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Country.m; path = Models/Country.m; sourceTree = "<group>"; };
+		3FF5DE8E188EACCE004F275D /* CountryManagedObject+Fixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CountryManagedObject+Fixes.h"; path = "Extensions/CountryManagedObject+Fixes.h"; sourceTree = "<group>"; };
+		3FF5DE8F188EACCE004F275D /* CountryManagedObject+Fixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CountryManagedObject+Fixes.m"; path = "Extensions/CountryManagedObject+Fixes.m"; sourceTree = "<group>"; };
+		3FF5DE91188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+BackgroundFetch.h"; path = "Extensions/NSManagedObjectContext+BackgroundFetch.h"; sourceTree = "<group>"; };
+		3FF5DE92188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+BackgroundFetch.m"; path = "Extensions/NSManagedObjectContext+BackgroundFetch.m"; sourceTree = "<group>"; };
 		4CE92C69A36A446797C4099F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9024A222918D441B929F651E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +194,7 @@
 				3FC6F77A18859468009D48CB /* Application */,
 				3FE6850418859A0000AEA2CD /* Controllers */,
 				3FE6851C1885BAF800AEA2CD /* Definitions */,
+				3FF5DE8D188EACA0004F275D /* Extensions */,
 				3FE685181885B71E00AEA2CD /* Helpers */,
 				3FE685111885B6A500AEA2CD /* Managers */,
 				3FE685021885996C00AEA2CD /* Models */,
@@ -319,6 +326,17 @@
 				3F380DF718871C3D00BAEC2F /* CitiesStorage.h */,
 			);
 			name = Definitions;
+			sourceTree = "<group>";
+		};
+		3FF5DE8D188EACA0004F275D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3FF5DE8E188EACCE004F275D /* CountryManagedObject+Fixes.h */,
+				3FF5DE8F188EACCE004F275D /* CountryManagedObject+Fixes.m */,
+				3FF5DE91188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.h */,
+				3FF5DE92188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,6 +472,8 @@
 			files = (
 				3FDA2BE41886C074001790F8 /* CacheHelper.m in Sources */,
 				3F1DB16718884F80005C9C17 /* ModelUtils.m in Sources */,
+				3FF5DE93188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m in Sources */,
+				3FF5DE90188EACCE004F275D /* CountryManagedObject+Fixes.m in Sources */,
 				3F294ED8188984910013C51D /* CitiesOperation.m in Sources */,
 				3FDA2BE71886CFCF001790F8 /* Models.xcdatamodeld in Sources */,
 				3FE685241885C64200AEA2CD /* Country.m in Sources */,

@@ -11,6 +11,8 @@
 #import "WeatherAppManager.h"
 #import "Country.h"
 #import "City.h"
+#import "DatabaseHelper.h"
+#import "CityManagedObject.h"
 #include <mach/mach_time.h>
 
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -18,6 +20,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @interface CountriesViewController ()
 
 @property (nonatomic, strong) NSMutableArray *countries;
+@property (nonatomic, strong) DatabaseHelper *databaseHelper;
 
 - (void)loadCountries;
 
@@ -80,9 +83,25 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 #pragma mark - Private Methods
 
+/*
+ Benchmarking method copied from Peter Steinberger's PSPDFPerformAndTrackTime available here: https://github.com/steipete/PSTFoundationBenchmark
+ */
+
 - (void)loadCountries
 {
+    uint64_t startTime = mach_absolute_time();
     [[WeatherAppManager sharedManager] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+        uint64_t endTime = mach_absolute_time();
+        uint64_t elapsedTime = endTime - startTime;
+        static double ticksToNanoseconds = 0.0;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            mach_timebase_info_data_t timebase;
+            mach_timebase_info(&timebase);
+            ticksToNanoseconds = (double)timebase.numer / timebase.denom;
+        });
+        double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
+        DDLogInfo(@"Execution time: %f [ms]", elapsedTimeInNanoseconds/1E6);
         if (!error) {
             if (array) {
                 [self.countries removeAllObjects];
@@ -98,25 +117,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 #pragma mark - IBAction
 
-/*
- Benchmarking method copied from Peter Steinberger's PSPDFPerformAndTrackTime available here: https://github.com/steipete/PSTFoundationBenchmark
- */
-
 - (IBAction)onRefreshControlValueChanged:(id)sender
 {
-    uint64_t startTime = mach_absolute_time();
     [[WeatherAppManager sharedManager] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
-        uint64_t endTime = mach_absolute_time();
-        uint64_t elapsedTime = endTime - startTime;
-        static double ticksToNanoseconds = 0.0;
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            mach_timebase_info_data_t timebase;
-            mach_timebase_info(&timebase);
-            ticksToNanoseconds = (double)timebase.numer / timebase.denom;
-        });
-        double elapsedTimeInNanoseconds = elapsedTime * ticksToNanoseconds;
-        DDLogInfo(@"Execution time: %f [ms]", elapsedTimeInNanoseconds/1E6);
+        
         if (!error) {
             if (array) {
                 [self.countries removeAllObjects];
@@ -151,16 +155,33 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return cell;
 }
 
+@end
+
 #pragma mark - Testing
+
+@implementation CountriesViewController (Testing)
+
+- (DatabaseHelper *)databaseHelper
+{
+    if (_databaseHelper == nil) {
+        _databaseHelper = [[DatabaseHelper alloc] init];
+    }
+    return _databaseHelper;
+}
 
 - (void)testDataSource
 {
-    NSLog(@"Total countries: %d", [_countries count]);
+    DDLogInfo(@"Country count: %d", [_countries count]);
     for (Country *country in _countries) {
-        NSLog(@"Total cities: %d", [country.cities count]);
-        for (City *city in country.cities) {
-            
-        }
+        CountryManagedObject *countryManagedObject = [[self databaseHelper] getCountryManagedObjectWithCountryCode:
+                                                      country.countryCode
+                                                                                                         inContext:
+                                                      [NSManagedObjectContext MR_contextForCurrentThread]];
+        NSArray *array = [CityManagedObject MR_findAllWithPredicate:
+                          [NSPredicate predicateWithFormat:@"country == %@", countryManagedObject]
+                                                          inContext:
+                          [NSManagedObjectContext MR_contextForCurrentThread]];
+        DDLogInfo(@"City count for %@: %d", country.countryName, [array count]);
     }
 }
 

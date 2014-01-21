@@ -131,8 +131,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                         if (!error) {
                             if (array) {
                                 NSArray *sortedArray = [ModelUtils sortCities:array];
-                                [ModelUtils relateCities:sortedArray
-                                             withCountry:country];
                                 [[self cacheHelper] storeCities:sortedArray
                                                     fromCountry:country];
                                 [[self databaseHelper] storeCities:sortedArray

@@ -11,6 +11,7 @@
 #import "TranslatorHelper.h"
 #import "DatabaseHelper.h"
 #import "ModelUtils.h"
+#import "CityManagedObject.h"
 
 @interface CitiesOperation ()
 
@@ -56,11 +57,21 @@
         
         if (self.isCancelled)
             return;
-        
-        if ([_country.cities count] > 0) {
+        CountryManagedObject *countryManagedObject = [[self databaseHelper] getCountryManagedObjectWithCountryCode:
+                                                      _country.countryCode
+                                                                                                         inContext:
+                                                      [NSManagedObjectContext MR_contextForCurrentThread]];
+        if (self.isCancelled)
+            return;
+        NSArray *array = [CityManagedObject MR_findAllWithPredicate:
+                          [NSPredicate predicateWithFormat:@"country == %@", countryManagedObject]
+                                                          inContext:
+                          [NSManagedObjectContext MR_contextForCurrentThread]];
+        if (self.isCancelled)
+            return;
+        if ([array count] > 0) {
             return;
         }
-        
         NSString *URL = [NSString stringWithFormat:@"http://api.geonames.org/searchJSON?country=%@&username=WeatherApp", _country.countryCode];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setURL:[NSURL URLWithString:URL]];
@@ -80,8 +91,6 @@
             NSArray *cities = [[self translatorHelper] translateCollectionFromJSON:[dictionary objectForKey:@"geonames"]
                                                                      withClassName:@"City"];
             NSArray *sortedArray = [ModelUtils sortCities:cities];
-            [ModelUtils relateCities:sortedArray
-                         withCountry:_country];
             if (self.isCancelled)
                 return;
             [[self databaseHelper] storeCities:sortedArray

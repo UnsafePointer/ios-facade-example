@@ -12,15 +12,6 @@
 
 @implementation ModelUtils
 
-+ (void)relateCities:(NSArray *)cities
-         withCountry:(Country *)country;
-{
-    for (City *city in cities) {
-        [city setCountry:country];
-    }
-    [country setCities:cities];
-}
-
 + (NSArray *)sortCountries:(NSArray *)countries
 {
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"countryName" ascending:YES];

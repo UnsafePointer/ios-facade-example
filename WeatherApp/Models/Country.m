@@ -24,20 +24,12 @@
     return @{
              @"countryName" : @"countryName",
              @"countryCode" : @"countryCode",
-             @"cities" : @"cities"
             };
 }
 
 + (NSString *)managedObjectEntityName
 {
     return @"CountryManagedObject";
-}
-
-+ (NSDictionary *)relationshipModelClassesByPropertyKey
-{
-    return @{
-             @"cities" : [City class]
-            };
 }
 
 + (NSSet *)propertyKeysForManagedObjectUniquing
