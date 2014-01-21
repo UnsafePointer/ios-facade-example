@@ -21,7 +21,7 @@ $ cd ios-facade-example && pod install && open WeatherApp.xcworkspace
 
 __Design notes:__
 
-* I used to keep Core Data relationships on MTLModel (check [v1.0](https://github.com/Ruenzuo/ios-facade-example/commit/b99d7f31a6afc4b4a37c992b51692270c5056f69)) but I ended up changing this later (check [v1.1](https://github.com/Ruenzuo/ios-facade-example/commit/ddcb34612bdbeca24df46da313721a543a3973b9)) decreasing memory usage from ~40MB to ~20MB.
+* I used to keep Core Data relationships on MTLModel (check [v1.0](https://github.com/Ruenzuo/ios-facade-example/commit/b99d7f31a6afc4b4a37c992b51692270c5056f69)) but I ended up changing this later (check [v1.1](https://github.com/Ruenzuo/ios-facade-example/commit/ddcb34612bdbeca24df46da313721a543a3973b9)) which decreased memory usage from ~40MB to ~20MB and startup time from ~3s to ~0s.
 * Probably this can be done without Mantel layer, I just think it makes things easier that handling NSManagedObject instances. 
 * There are a lot of performance and test hooks and methods that you don't need to have on production.
 
