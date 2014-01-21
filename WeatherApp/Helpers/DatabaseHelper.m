@@ -55,6 +55,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     CountryManagedObject *countryManagedObject = [self getCountryManagedObjectWithCountryCode:country.countryCode
                                                                                     inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"CityManagedObject"];
+    fetchRequest.includesPropertyValues = NO;
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
                                                                    ascending:YES];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"country == %@", countryManagedObject];
@@ -104,6 +105,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"CountryManagedObject"];
+    fetchRequest.includesPropertyValues = NO;
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"countryName"
                                                                    ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
