@@ -12,6 +12,7 @@
 		3F21106218884E1C00CE428E /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F21106118884E1C00CE428E /* Station.m */; };
 		3F294ED8188984910013C51D /* CitiesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F294ED7188984910013C51D /* CitiesOperation.m */; };
 		3F92E01C188FFF4D003B8236 /* ConfigurationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F92E01B188FFF4D003B8236 /* ConfigurationHelper.m */; };
+		3F92E01F18900839003B8236 /* StationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F92E01E18900839003B8236 /* StationDetailsViewController.m */; };
 		3FC1CB09188800EE00845D9C /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1CB08188800EE00845D9C /* City.m */; };
 		3FC6F74318859381009D48CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC6F74218859381009D48CB /* Foundation.framework */; };
 		3FC6F74518859381009D48CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC6F74418859381009D48CB /* CoreGraphics.framework */; };
@@ -68,6 +69,8 @@
 		3F380DF718871C3D00BAEC2F /* CitiesStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CitiesStorage.h; path = Definitions/CitiesStorage.h; sourceTree = "<group>"; };
 		3F92E01A188FFF4D003B8236 /* ConfigurationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigurationHelper.h; path = Helpers/ConfigurationHelper.h; sourceTree = "<group>"; };
 		3F92E01B188FFF4D003B8236 /* ConfigurationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationHelper.m; path = Helpers/ConfigurationHelper.m; sourceTree = "<group>"; };
+		3F92E01D18900839003B8236 /* StationDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationDetailsViewController.h; path = Controllers/StationDetailsViewController.h; sourceTree = "<group>"; };
+		3F92E01E18900839003B8236 /* StationDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationDetailsViewController.m; path = Controllers/StationDetailsViewController.m; sourceTree = "<group>"; };
 		3FC1CB07188800EE00845D9C /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = City.h; path = Models/City.h; sourceTree = "<group>"; };
 		3FC1CB08188800EE00845D9C /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = City.m; path = Models/City.m; sourceTree = "<group>"; };
 		3FC6F73F18859381009D48CB /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -311,6 +314,8 @@
 				3FDA2BF71886F1AE001790F8 /* CitiesViewController.m */,
 				3FF5DE9F188EF119004F275D /* StationsViewController.h */,
 				3FF5DEA0188EF119004F275D /* StationsViewController.m */,
+				3F92E01D18900839003B8236 /* StationDetailsViewController.h */,
+				3F92E01E18900839003B8236 /* StationDetailsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -499,6 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F92E01F18900839003B8236 /* StationDetailsViewController.m in Sources */,
 				3FDA2BE41886C074001790F8 /* CacheHelper.m in Sources */,
 				3F1DB16718884F80005C9C17 /* ModelUtils.m in Sources */,
 				3FF5DE93188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m in Sources */,

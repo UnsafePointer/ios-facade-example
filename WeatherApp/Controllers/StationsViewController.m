@@ -9,6 +9,7 @@
 #import "StationsViewController.h"
 #import "WeatherAppManager.h"
 #import "Station.h"
+#import "StationDetailsViewController.h"
 #include <mach/mach_time.h>
 
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -40,6 +41,17 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
     [super didReceiveMemoryWarning];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"StationDetailsSegue"]) {
+        StationDetailsViewController *viewController = (StationDetailsViewController *)[segue destinationViewController];
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        Station *station = [_stations objectAtIndex:selectedIndexPath.row];
+        viewController.station = station;
+    }
+}
+
 
 #pragma mark - Private Methods
 
