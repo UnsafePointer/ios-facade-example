@@ -13,7 +13,9 @@
 #import "DatabaseHelper.h"
 #import "ModelUtils.h"
 #import "CitiesOperation.h"
+#import "StationOperation.h"
 #import "Country.h"
+#import "City.h"
 
 @interface WeatherAppManager ()
 
@@ -22,6 +24,8 @@
 @property (nonatomic, strong) DatabaseHelper *databaseHelper;
 @property (nonatomic, strong) NSMutableSet *currentCitiesOperations;
 @property (nonatomic, strong) NSOperationQueue *citiesOperationQueue;
+@property (nonatomic, strong) NSMutableSet *currentStationsOperations;
+@property (nonatomic, strong) NSOperationQueue *stationsOperationQueue;
 
 @end
 
@@ -58,18 +62,38 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return _databaseHelper;
 }
 
-- (NSMutableSet *)currentCitiesOperations {
+- (NSMutableSet *)currentCitiesOperations
+{
     if (!_currentCitiesOperations) {
         _currentCitiesOperations = [[NSMutableSet alloc] init];
     }
     return _currentCitiesOperations;
 }
 
-- (NSOperationQueue *)citiesOperationQueue {
+- (NSOperationQueue *)citiesOperationQueue
+{
     if (!_citiesOperationQueue) {
         _citiesOperationQueue = [[NSOperationQueue alloc] init];
         _citiesOperationQueue.name = @"Cities Operation Queue";
         _citiesOperationQueue.maxConcurrentOperationCount = 3;
+    }
+    return _citiesOperationQueue;
+}
+
+- (NSMutableSet *)currentStationsOperations
+{
+    if (!_currentStationsOperations) {
+        _currentStationsOperations = [[NSMutableSet alloc] init];
+    }
+    return _currentStationsOperations;
+}
+
+- (NSOperationQueue *)stationsOperationQueue
+{
+    if (!_stationsOperationQueue) {
+        _stationsOperationQueue = [[NSOperationQueue alloc] init];
+        _stationsOperationQueue.name = @"Stations Operation Queue";
+        _stationsOperationQueue.maxConcurrentOperationCount = 3;
     }
     return _citiesOperationQueue;
 }
@@ -85,24 +109,86 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return _sharedManager;
 }
 
-#pragma mark - Private Methods
+#pragma mark - Public Methods
 
 - (void)startBackgroundCitiesFetchingWithCountries:(NSArray *)countries
 {
     for (Country *country in countries) {
-        if (![[self currentCitiesOperations] containsObject:country]) {
+        if (![[self currentCitiesOperations] containsObject:country.countryCode]) {
             CitiesOperation *operation = [[CitiesOperation alloc] initWithCountry:country];
+            operation.delegate = self;
             [[self currentCitiesOperations] addObject:country.countryCode];
             [[self citiesOperationQueue] addOperation:operation];
         }   
     }
 }
 
+- (void)startBackgroundStationFetchingWithCities:(NSArray *)cities
+{
+    for (City *city in cities) {
+        if (![[self currentStationsOperations] containsObject:city.name]) {
+            StationOperation *operation = [[StationOperation alloc] initWithCity:city];
+            operation.delegate = self;
+            [[self currentStationsOperations] addObject:city.name];
+            [[self stationsOperationQueue] addOperation:operation];
+        }
+    }
+}
+
 #pragma mark - CitiesOperationDelegate
 
-- (void)citiesOperationDidFinish:(CitiesOperation *)operation
+- (void)citiesOperationDidFinish:(NSDictionary *)dictionary;
 {
+    CitiesOperation *operation = [dictionary objectForKey:@"operation"];
+    NSArray *cities = [dictionary objectForKey:@"cities"];
     [[self currentCitiesOperations] removeObject:operation.country.countryCode];
+    DDLogInfo(@"Remaining cities operations: %d", [[self currentCitiesOperations] count]);
+    [self startBackgroundStationFetchingWithCities:cities];
+}
+
+#pragma mark - StationsOperationDelegate
+
+- (void)stationsOperationDidFinish:(StationOperation *)operation
+{
+    [[self currentStationsOperations] removeObject:operation.city.name];
+    DDLogInfo(@"Remaining stations operations: %d", [[self currentStationsOperations] count]);
+}
+
+#pragma mark - CountriesStorage Protocol
+
+- (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
+{
+    [[self cacheHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+        if (array) {
+            DDLogInfo(@"Contries retrieved from memory");
+            completion(array, nil);
+        }
+        else {
+            [[self databaseHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+                if ([array count] > 0) {
+                    [[self cacheHelper] storeCountries:array];
+                    DDLogInfo(@"Contries retrieved from database");
+                    completion(array, nil);
+                }
+                else {
+                    [[self networkingHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+                        if (!error) {
+                            if (array) {
+                                NSArray *sortedArray = [ModelUtils sortCountries:array];
+                                [[self cacheHelper] storeCountries:sortedArray];
+                                [[self databaseHelper] storeCountries:sortedArray];
+                                DDLogInfo(@"Contries retrieved from network");
+                                completion(sortedArray, nil);
+                            }
+                        }
+                        else {
+                            completion(nil, error);
+                        }
+                    }];
+                }
+            }];
+        }
+    }];
 }
 
 #pragma mark - CitiesFetcher Protocol
@@ -150,30 +236,37 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }];
 }
 
-#pragma mark - CountriesStorage Protocol
+#pragma mark - StationsFetcher Protocol
 
-- (void)getCountriesWithCompletion:(ArrayCompletionBlock)completion
+- (void)getStationsWithCity:(City *)city
+                 completion:(ArrayCompletionBlock)completion
 {
-    [[self cacheHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+    [[self cacheHelper] getStationsWithCity:city
+                                 completion:^(NSArray *array, NSError *error) {
         if (array) {
-            DDLogInfo(@"Contries retrieved from memory");
+            DDLogInfo(@"Stations retrieved from memory");
             completion(array, nil);
         }
         else {
-            [[self databaseHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+            [[self databaseHelper] getStationsWithCity:city
+                                            completion:^(NSArray *array, NSError *error) {
                 if ([array count] > 0) {
-                    [[self cacheHelper] storeCountries:array];
-                    DDLogInfo(@"Contries retrieved from database");
+                    [[self cacheHelper] storeStations:array
+                                             fromCity:city];
+                    DDLogInfo(@"Stations retrieved from database");
                     completion(array, nil);
                 }
                 else {
-                    [[self networkingHelper] getCountriesWithCompletion:^(NSArray *array, NSError *error) {
+                    [[self networkingHelper] getStationsWithCity:city
+                                                      completion:^(NSArray *array, NSError *error) {
                         if (!error) {
                             if (array) {
-                                NSArray *sortedArray = [ModelUtils sortCountries:array];
-                                [[self cacheHelper] storeCountries:sortedArray];
-                                [[self databaseHelper] storeCountries:sortedArray];
-                                DDLogInfo(@"Contries retrieved from network");
+                                NSArray *sortedArray = [ModelUtils sortStations:array];
+                                [[self cacheHelper] storeStations:sortedArray
+                                                         fromCity:city];
+                                [[self databaseHelper] storeStations:sortedArray
+                                                            fromCity:city];
+                                DDLogInfo(@"Stations retrieved from network");
                                 completion(sortedArray, nil);
                             }
                         }

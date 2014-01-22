@@ -15,7 +15,7 @@
 {
     return @{
              @"countryName" : @"countryName",
-             @"countryCode" : @"countryCode",
+             @"countryCode" : @"countryCode"
             };
 }
 
@@ -23,18 +23,13 @@
 {
     return @{
              @"countryName" : @"countryName",
-             @"countryCode" : @"countryCode",
+             @"countryCode" : @"countryCode"
             };
 }
 
 + (NSString *)managedObjectEntityName
 {
     return @"CountryManagedObject";
-}
-
-+ (NSSet *)propertyKeysForManagedObjectUniquing
-{
-    return [NSSet setWithObject:@"countryCode"];
 }
 
 @end

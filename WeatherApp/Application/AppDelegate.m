@@ -14,6 +14,10 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
+{
+}
+
+#pragma mark - Application Life Cycle
 
 -           (BOOL)application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

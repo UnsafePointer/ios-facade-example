@@ -1,32 +1,32 @@
 //
-//  NetworkOperation.m
+//  StationOperation.m
 //  WeatherApp
 //
-//  Created by Renzo Crisóstomo on 1/17/14.
+//  Created by Renzo Crisóstomo on 1/21/14.
 //  Copyright (c) 2014 Ruenzuo. All rights reserved.
 //
 
-#import "CitiesOperation.h"
-#import "Country.h"
+#import "StationOperation.h"
 #import "TranslatorHelper.h"
 #import "DatabaseHelper.h"
+#import "City.h"
+#import "StationManagedObject.h"
 #import "ModelUtils.h"
-#import "CityManagedObject.h"
 
-@interface CitiesOperation ()
+@interface StationOperation ()
 
-@property (nonatomic, retain, readwrite) Country *country;
+@property (nonatomic, retain, readwrite) City *city;
 @property (nonatomic, strong) TranslatorHelper *translatorHelper;
 @property (nonatomic, strong) DatabaseHelper *databaseHelper;
 
 @end
 
-@implementation CitiesOperation
+@implementation StationOperation
 
-- (id)initWithCountry:(Country *)country
+- (id)initWithCity:(City *)city
 {
     if (self = [super init]) {
-        self.country = country;
+        self.city = city;
     }
     return self;
 }
@@ -57,22 +57,18 @@
         
         if (self.isCancelled)
             return;
-        CountryManagedObject *countryManagedObject = [[self databaseHelper] getCountryManagedObjectWithCountryCode:
-                                                      _country.countryCode
-                                                                                                         inContext:
-                                                      [NSManagedObjectContext MR_contextForCurrentThread]];
+        CityManagedObject *cityManagedObject = [[self databaseHelper] getCityManagedObjectWithName:_city.name
+                                                                                         inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
         if (self.isCancelled)
             return;
-        NSArray *array = [CityManagedObject MR_findAllWithPredicate:
-                          [NSPredicate predicateWithFormat:@"country == %@", countryManagedObject]
-                                                          inContext:
-                          [NSManagedObjectContext MR_contextForCurrentThread]];
+        NSArray *array = [StationManagedObject MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"city == %@", cityManagedObject]
+                                                             inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
         if (self.isCancelled)
             return;
         if ([array count] > 0) {
             return;
         }
-        NSString *URL = [NSString stringWithFormat:@"http://api.geonames.org/searchJSON?country=%@&username=WeatherApp", _country.countryCode];
+        NSString *URL = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/find?lat=%.2f&lon=%.2f", [_city.lat floatValue], [_city.lng floatValue]];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         [request setURL:[NSURL URLWithString:URL]];
         [request setHTTPMethod:@"GET"];
@@ -82,27 +78,26 @@
         NSData *data = [NSURLConnection sendSynchronousRequest:request
                                              returningResponse:&response
                                                          error:&error];
-        NSArray *sortedArray;
         if (!error && response) {
             NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                        options:kNilOptions
                                                                          error:&error];
             if (self.isCancelled)
                 return;
-            NSArray *cities = [[self translatorHelper] translateCollectionFromJSON:[dictionary objectForKey:@"geonames"]
-                                                                     withClassName:@"City"];
-            sortedArray = [ModelUtils sortCities:cities];
+            NSArray *stations = [[self translatorHelper] translateCollectionFromJSON:[dictionary objectForKey:@"list"]
+                                                                       withClassName:@"Station"];
+            NSArray *sortedArray = [ModelUtils sortCities:stations];
             if (self.isCancelled)
                 return;
-            [[self databaseHelper] storeCities:sortedArray
-                                   fromCountry:_country];
+            [[self databaseHelper] storeStations:sortedArray
+                                        fromCity:_city];
         }
         
         if (self.isCancelled)
             return;
-        if ([self.delegate respondsToSelector:@selector(citiesOperationDidFinish:)]) {
-            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(citiesOperationDidFinish:)
-                                                        withObject:@{@"operation" : self, @"cities": sortedArray}
+        if ([self.delegate respondsToSelector:@selector(stationsOperationDidFinish:)]) {
+            [(NSObject *)self.delegate performSelectorOnMainThread:@selector(stationsOperationDidFinish:)
+                                                        withObject:self
                                                      waitUntilDone:NO];
         }
     }

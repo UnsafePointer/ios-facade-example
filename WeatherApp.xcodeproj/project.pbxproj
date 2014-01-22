@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3F1DB16718884F80005C9C17 /* ModelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DB16618884F80005C9C17 /* ModelUtils.m */; };
-		3F1DB16F188850F1005C9C17 /* CityManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DB16C188850F1005C9C17 /* CityManagedObject.m */; };
 		3F1DB170188850F1005C9C17 /* CountryManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DB16E188850F1005C9C17 /* CountryManagedObject.m */; };
 		3F21106218884E1C00CE428E /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F21106118884E1C00CE428E /* Station.m */; };
 		3F294ED8188984910013C51D /* CitiesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F294ED7188984910013C51D /* CitiesOperation.m */; };
@@ -38,6 +37,11 @@
 		3FE685241885C64200AEA2CD /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE685231885C64200AEA2CD /* Country.m */; };
 		3FF5DE90188EACCE004F275D /* CountryManagedObject+Fixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5DE8F188EACCE004F275D /* CountryManagedObject+Fixes.m */; };
 		3FF5DE93188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5DE92188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m */; };
+		3FF5DE96188EDA57004F275D /* StationManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5DE95188EDA57004F275D /* StationManagedObject.m */; };
+		3FF5DE99188EDB25004F275D /* CityManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5DE98188EDB25004F275D /* CityManagedObject.m */; };
+		3FF5DE9E188EDD05004F275D /* CityManagedObject+Fixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5DE9D188EDD05004F275D /* CityManagedObject+Fixes.m */; };
+		3FF5DEA1188EF119004F275D /* StationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5DEA0188EF119004F275D /* StationsViewController.m */; };
+		3FF5DEA4188EF917004F275D /* StationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FF5DEA3188EF917004F275D /* StationOperation.m */; };
 		E56CA4BD26154E279309C175 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE92C69A36A446797C4099F /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -54,8 +58,6 @@
 /* Begin PBXFileReference section */
 		3F1DB16518884F80005C9C17 /* ModelUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelUtils.h; path = Helpers/ModelUtils.h; sourceTree = "<group>"; };
 		3F1DB16618884F80005C9C17 /* ModelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModelUtils.m; path = Helpers/ModelUtils.m; sourceTree = "<group>"; };
-		3F1DB16B188850F1005C9C17 /* CityManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CityManagedObject.h; path = Models/CityManagedObject.h; sourceTree = "<group>"; };
-		3F1DB16C188850F1005C9C17 /* CityManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CityManagedObject.m; path = Models/CityManagedObject.m; sourceTree = "<group>"; };
 		3F1DB16D188850F1005C9C17 /* CountryManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CountryManagedObject.h; path = Models/CountryManagedObject.h; sourceTree = "<group>"; };
 		3F1DB16E188850F1005C9C17 /* CountryManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CountryManagedObject.m; path = Models/CountryManagedObject.m; sourceTree = "<group>"; };
 		3F21106018884E1C00CE428E /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Station.h; path = Models/Station.h; sourceTree = "<group>"; };
@@ -109,6 +111,18 @@
 		3FF5DE8F188EACCE004F275D /* CountryManagedObject+Fixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CountryManagedObject+Fixes.m"; path = "Extensions/CountryManagedObject+Fixes.m"; sourceTree = "<group>"; };
 		3FF5DE91188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectContext+BackgroundFetch.h"; path = "Extensions/NSManagedObjectContext+BackgroundFetch.h"; sourceTree = "<group>"; };
 		3FF5DE92188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectContext+BackgroundFetch.m"; path = "Extensions/NSManagedObjectContext+BackgroundFetch.m"; sourceTree = "<group>"; };
+		3FF5DE94188EDA57004F275D /* StationManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationManagedObject.h; path = Models/StationManagedObject.h; sourceTree = "<group>"; };
+		3FF5DE95188EDA57004F275D /* StationManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationManagedObject.m; path = Models/StationManagedObject.m; sourceTree = "<group>"; };
+		3FF5DE97188EDB25004F275D /* CityManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CityManagedObject.h; path = Models/CityManagedObject.h; sourceTree = "<group>"; };
+		3FF5DE98188EDB25004F275D /* CityManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CityManagedObject.m; path = Models/CityManagedObject.m; sourceTree = "<group>"; };
+		3FF5DE9A188EDB71004F275D /* StationsFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StationsFetcher.h; path = Definitions/StationsFetcher.h; sourceTree = "<group>"; };
+		3FF5DE9B188EDB80004F275D /* StationsStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = StationsStorage.h; path = Definitions/StationsStorage.h; sourceTree = "<group>"; };
+		3FF5DE9C188EDD05004F275D /* CityManagedObject+Fixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CityManagedObject+Fixes.h"; path = "Extensions/CityManagedObject+Fixes.h"; sourceTree = "<group>"; };
+		3FF5DE9D188EDD05004F275D /* CityManagedObject+Fixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CityManagedObject+Fixes.m"; path = "Extensions/CityManagedObject+Fixes.m"; sourceTree = "<group>"; };
+		3FF5DE9F188EF119004F275D /* StationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationsViewController.h; path = Controllers/StationsViewController.h; sourceTree = "<group>"; };
+		3FF5DEA0188EF119004F275D /* StationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationsViewController.m; path = Controllers/StationsViewController.m; sourceTree = "<group>"; };
+		3FF5DEA2188EF917004F275D /* StationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationOperation.h; path = Operations/StationOperation.h; sourceTree = "<group>"; };
+		3FF5DEA3188EF917004F275D /* StationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationOperation.m; path = Operations/StationOperation.m; sourceTree = "<group>"; };
 		4CE92C69A36A446797C4099F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9024A222918D441B929F651E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +166,8 @@
 			children = (
 				3F294ED6188984910013C51D /* CitiesOperation.h */,
 				3F294ED7188984910013C51D /* CitiesOperation.m */,
+				3FF5DEA2188EF917004F275D /* StationOperation.h */,
+				3FF5DEA3188EF917004F275D /* StationOperation.m */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -264,8 +280,10 @@
 				3F21106118884E1C00CE428E /* Station.m */,
 				3F1DB16D188850F1005C9C17 /* CountryManagedObject.h */,
 				3F1DB16E188850F1005C9C17 /* CountryManagedObject.m */,
-				3F1DB16B188850F1005C9C17 /* CityManagedObject.h */,
-				3F1DB16C188850F1005C9C17 /* CityManagedObject.m */,
+				3FF5DE97188EDB25004F275D /* CityManagedObject.h */,
+				3FF5DE98188EDB25004F275D /* CityManagedObject.m */,
+				3FF5DE94188EDA57004F275D /* StationManagedObject.h */,
+				3FF5DE95188EDA57004F275D /* StationManagedObject.m */,
 				3FDA2BDC1886B064001790F8 /* RequestOperationConfig.h */,
 				3FDA2BDD1886B064001790F8 /* RequestOperationConfig.m */,
 				3FDA2BE51886CFCF001790F8 /* Models.xcdatamodeld */,
@@ -288,6 +306,8 @@
 				3FE6850B18859B3800AEA2CD /* CountriesViewController.m */,
 				3FDA2BF61886F1AE001790F8 /* CitiesViewController.h */,
 				3FDA2BF71886F1AE001790F8 /* CitiesViewController.m */,
+				3FF5DE9F188EF119004F275D /* StationsViewController.h */,
+				3FF5DEA0188EF119004F275D /* StationsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -324,6 +344,8 @@
 				3FDA2BF21886E891001790F8 /* CountriesStorage.h */,
 				3FDA2BDF1886B272001790F8 /* CitiesFetcher.h */,
 				3F380DF718871C3D00BAEC2F /* CitiesStorage.h */,
+				3FF5DE9A188EDB71004F275D /* StationsFetcher.h */,
+				3FF5DE9B188EDB80004F275D /* StationsStorage.h */,
 			);
 			name = Definitions;
 			sourceTree = "<group>";
@@ -333,6 +355,8 @@
 			children = (
 				3FF5DE8E188EACCE004F275D /* CountryManagedObject+Fixes.h */,
 				3FF5DE8F188EACCE004F275D /* CountryManagedObject+Fixes.m */,
+				3FF5DE9C188EDD05004F275D /* CityManagedObject+Fixes.h */,
+				3FF5DE9D188EDD05004F275D /* CityManagedObject+Fixes.m */,
 				3FF5DE91188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.h */,
 				3FF5DE92188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m */,
 			);
@@ -475,18 +499,22 @@
 				3FF5DE93188EB074004F275D /* NSManagedObjectContext+BackgroundFetch.m in Sources */,
 				3FF5DE90188EACCE004F275D /* CountryManagedObject+Fixes.m in Sources */,
 				3F294ED8188984910013C51D /* CitiesOperation.m in Sources */,
+				3FF5DE9E188EDD05004F275D /* CityManagedObject+Fixes.m in Sources */,
 				3FDA2BE71886CFCF001790F8 /* Models.xcdatamodeld in Sources */,
 				3FE685241885C64200AEA2CD /* Country.m in Sources */,
+				3FF5DEA4188EF917004F275D /* StationOperation.m in Sources */,
 				3FDA2BF11886E301001790F8 /* DatabaseHelper.m in Sources */,
+				3FF5DE96188EDA57004F275D /* StationManagedObject.m in Sources */,
 				3F21106218884E1C00CE428E /* Station.m in Sources */,
 				3FC1CB09188800EE00845D9C /* City.m in Sources */,
 				3FC6F77D18859472009D48CB /* AppDelegate.m in Sources */,
 				3FE685171885B6EE00AEA2CD /* WeatherAppManager.m in Sources */,
 				3FE6850C18859B3800AEA2CD /* CountriesViewController.m in Sources */,
+				3FF5DEA1188EF119004F275D /* StationsViewController.m in Sources */,
 				3FDA2BF81886F1AE001790F8 /* CitiesViewController.m in Sources */,
 				3F1DB170188850F1005C9C17 /* CountryManagedObject.m in Sources */,
-				3F1DB16F188850F1005C9C17 /* CityManagedObject.m in Sources */,
 				3FDA2BDE1886B064001790F8 /* RequestOperationConfig.m in Sources */,
+				3FF5DE99188EDB25004F275D /* CityManagedObject.m in Sources */,
 				3FE6851B1885B9B600AEA2CD /* NetworkingHelper.m in Sources */,
 				3FC6F77618859441009D48CB /* main.m in Sources */,
 				3FDA2BDB1886AC67001790F8 /* TranslatorHelper.m in Sources */,

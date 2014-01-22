@@ -1,19 +1,19 @@
 //
-//  Cities.h
+//  StationsFetcher.h
 //  WeatherApp
 //
-//  Created by Renzo Crisóstomo on 1/14/14.
+//  Created by Renzo Crisóstomo on 1/21/14.
 //  Copyright (c) 2014 Ruenzuo. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "Blocks.h"
 
-@class Country;
+@class City;
 
-@protocol CitiesFetcher <NSObject>
+@protocol StationsFetcher <NSObject>
 
-- (void)getCitiesWithCountry:(Country *)country
+- (void)getStationsWithCity:(City *)city
                   completion:(ArrayCompletionBlock)completion;
 
 @end

@@ -12,14 +12,18 @@
 #import "CountriesStorage.h"
 #import "CitiesFetcher.h"
 #import "CitiesStorage.h"
+#import "StationsFetcher.h"
+#import "StationsStorage.h"
 
 extern NSString * const CacheHelperErrorDomain;
 extern NSString * const MEMORY_CACHE_COUNTRIES_KEY;
 extern NSString * const MEMORY_CACHE_CITIES_KEY;
+extern NSString * const MEMORY_CACHE_STATIONS_KEY;
 extern int const MEMORY_CACHE_COST_LIMIT;
 extern int const MEMORY_CACHE_COUNTRIES_COST;
 extern int const MEMORY_CACHE_CITIES_COST;
+extern int const MEMORY_CACHE_STATIONS_COST;
 
-@interface CacheHelper : NSObject <CountriesFetcher, CountriesStorage, CitiesFetcher, CitiesStorage>
+@interface CacheHelper : NSObject <CountriesFetcher, CountriesStorage, CitiesFetcher, CitiesStorage, StationsFetcher, StationsStorage>
 
 @end

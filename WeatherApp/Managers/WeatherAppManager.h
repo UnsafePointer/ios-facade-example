@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "CitiesFetcher.h"
 #import "CountriesFetcher.h"
+#import "StationsFetcher.h"
+#import "CitiesOperation.h"
+#import "StationOperation.h"
 
-@interface WeatherAppManager : NSObject <CitiesFetcher, CountriesFetcher>
+@interface WeatherAppManager : NSObject <CitiesFetcher, CountriesFetcher, StationsFetcher, CitiesOperationDelegate, StationOperationDelegate>
 
 + (WeatherAppManager *)sharedManager;
 - (void)startBackgroundCitiesFetchingWithCountries:(NSArray *)countries;
+- (void)startBackgroundStationFetchingWithCities:(NSArray *)cities;
 
 @end

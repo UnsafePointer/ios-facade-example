@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class Country;
-
 @interface ModelUtils : NSObject
 
 + (NSArray *)sortCountries:(NSArray *)countries;
 + (NSArray *)sortCities:(NSArray *)cities;
++ (NSArray *)sortStations:(NSArray *)stations;
 
 @end

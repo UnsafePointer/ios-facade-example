@@ -7,6 +7,7 @@
 //
 
 #import "CitiesViewController.h"
+#import "StationsViewController.h"
 #import "WeatherAppManager.h"
 #import "City.h"
 #include <mach/mach_time.h>
@@ -17,9 +18,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @property (nonatomic, strong) NSMutableArray *cities;
 
+- (void)loadCities;
+
 @end
 
 @implementation CitiesViewController
+{
+}
+
+#pragma mark - View Controller Life Cycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -39,6 +46,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"StationSegue"]) {
+        StationsViewController *viewController = (StationsViewController *)[segue destinationViewController];
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        City *city = [_cities objectAtIndex:selectedIndexPath.row];
+        viewController.city = city;
+    }
 }
 
 #pragma mark - Private Methods
@@ -95,7 +112,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }];
 }
 
-#pragma mark - TableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

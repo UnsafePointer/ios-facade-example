@@ -14,7 +14,6 @@
 @interface CitiesOperation : NSOperation
 
 @property (nonatomic, retain, readonly) Country *country;
-
 @property (nonatomic, assign) id <CitiesOperationDelegate> delegate;
 
 - (id)initWithCountry:(Country *)country;
@@ -23,6 +22,6 @@
 
 @protocol CitiesOperationDelegate <NSObject>
 
-- (void)citiesOperationDidFinish:(CitiesOperation *)operation;
+- (void)citiesOperationDidFinish:(NSDictionary *)dictionary;
 
 @end

@@ -10,18 +10,44 @@
 #import "Country.h"
 #import "City.h"
 
+@interface ModelUtils ()
+
++ (NSArray *)sortArray:(NSArray *)array
+     withDescriptorKey:(NSString *)descriptorKey;
+
+@end
+
 @implementation ModelUtils
+{
+}
+
+#pragma mark - Private Methods
+
++ (NSArray *)sortArray:(NSArray *)array
+     withDescriptorKey:(NSString *)descriptorKey
+{
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:descriptorKey ascending:YES];
+    return [array sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+}
+
+#pragma mark - Public Methods
 
 + (NSArray *)sortCountries:(NSArray *)countries
 {
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"countryName" ascending:YES];
-    return [countries sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    return [self sortArray:countries
+         withDescriptorKey:@"countryName"];
 }
 
 + (NSArray *)sortCities:(NSArray *)cities
 {
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    return [cities sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    return [self sortArray:cities
+         withDescriptorKey:@"name"];
+}
+
++ (NSArray *)sortStations:(NSArray *)stations
+{
+    return [self sortArray:stations
+         withDescriptorKey:@"name"];
 }
 
 @end

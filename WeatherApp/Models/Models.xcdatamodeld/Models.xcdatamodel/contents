@@ -5,14 +5,23 @@
         <attribute name="lng" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CountryManagedObject" inverseName="cities" inverseEntity="CountryManagedObject" syncable="YES"/>
+        <relationship name="stations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="StationManagedObject" inverseName="city" inverseEntity="StationManagedObject" syncable="YES"/>
     </entity>
     <entity name="CountryManagedObject" representedClassName="CountryManagedObject" syncable="YES">
         <attribute name="countryCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="countryName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="cities" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CityManagedObject" inverseName="country" inverseEntity="CityManagedObject" syncable="YES"/>
     </entity>
+    <entity name="StationManagedObject" representedClassName="StationManagedObject" syncable="YES">
+        <attribute name="humidity" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pressure" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="temp" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityManagedObject" inverseName="stations" inverseEntity="CityManagedObject" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="CityManagedObject" positionX="0" positionY="0" width="128" height="103"/>
+        <element name="CityManagedObject" positionX="0" positionY="0" width="128" height="118"/>
         <element name="CountryManagedObject" positionX="-263" positionY="-63" width="128" height="88"/>
+        <element name="StationManagedObject" positionX="259" positionY="72" width="128" height="118"/>
     </elements>
 </model>

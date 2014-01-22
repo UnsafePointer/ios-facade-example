@@ -25,7 +25,7 @@
     return @{
              @"name" : @"name",
              @"lat" : @"lat",
-             @"lng" : @"lng",
+             @"lng" : @"lng"
             };
 }
 

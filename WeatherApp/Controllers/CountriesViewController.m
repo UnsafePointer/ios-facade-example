@@ -13,6 +13,7 @@
 #import "City.h"
 #import "DatabaseHelper.h"
 #import "CityManagedObject.h"
+#import "StationManagedObject.h"
 #include <mach/mach_time.h>
 
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -33,6 +34,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @end
 
 @implementation CountriesViewController
+{
+}
+
+#pragma mark - View Controller Life Cycle
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -136,7 +141,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }];
 }
 
-#pragma mark - TableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -182,6 +187,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                                           inContext:
                           [NSManagedObjectContext MR_contextForCurrentThread]];
         DDLogInfo(@"City count for %@: %d", country.countryName, [array count]);
+        for (City *city in array) {
+            CityManagedObject *cityManagedObject = [[self databaseHelper] getCityManagedObjectWithName:city.name
+                                                                                             inContext:[NSManagedObjectContext MR_contextForCurrentThread]];
+            NSArray *stations = [StationManagedObject MR_findAllWithPredicate:[NSPredicate predicateWithFormat:@"city == %@", cityManagedObject]
+                                                                    inContext:
+                                 [NSManagedObjectContext MR_contextForCurrentThread]];
+            DDLogInfo(@"Station count for %@: %d", city.name, [stations count]);
+        }
     }
 }
 

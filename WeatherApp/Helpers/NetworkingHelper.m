@@ -14,6 +14,7 @@
 #import "TranslatorHelper.h"
 #import "Blocks.h"
 #import "CacheHelper.h"
+#import "City.h"
 
 @interface NetworkingHelper ()
 
@@ -90,6 +91,30 @@
         }
         NSArray *collection = [[self translatorHelper] translateCollectionFromJSON:[responseObject objectForKey:@"geonames"]
                                                                      withClassName:@"Country"];
+        completion(collection, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (completion) {
+            completion(nil, error);
+        }
+    }];
+    [[NSOperationQueue mainQueue] addOperation:requestOperation];
+}
+
+#pragma mark - StationsFetcher Protocol
+
+- (void)getStationsWithCity:(City *)city
+                 completion:(ArrayCompletionBlock)completion;
+{
+    AFHTTPRequestOperation *requestOperation = [NetworkingHelper createHTTPRequestOperationWithConfiguration:^(RequestOperationConfig *config) {
+        config.URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/find?lat=%.2f&lon=%.2f", [city.lat floatValue], [city.lng floatValue]]];
+        config.responseSerializer = [AFJSONResponseSerializer serializer];
+    }];
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (!completion) {
+            return;
+        }
+        NSArray *collection = [[self translatorHelper] translateCollectionFromJSON:[responseObject objectForKey:@"list"]
+                                                                     withClassName:@"Station"];
         completion(collection, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (completion) {
