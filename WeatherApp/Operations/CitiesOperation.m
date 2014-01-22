@@ -12,12 +12,14 @@
 #import "DatabaseHelper.h"
 #import "ModelUtils.h"
 #import "CityManagedObject.h"
+#import "ConfigurationHelper.h"
 
 @interface CitiesOperation ()
 
 @property (nonatomic, retain, readwrite) Country *country;
 @property (nonatomic, strong) TranslatorHelper *translatorHelper;
 @property (nonatomic, strong) DatabaseHelper *databaseHelper;
+@property (nonatomic, strong) ConfigurationHelper *configurationHelper;
 
 @end
 
@@ -49,6 +51,14 @@
     return _databaseHelper;
 }
 
+- (ConfigurationHelper *)configurationHelper
+{
+    if (_configurationHelper == nil) {
+        _configurationHelper = [[ConfigurationHelper alloc] init];
+    }
+    return _configurationHelper;
+}
+
 #pragma mark - Main
 
 - (void)main
@@ -72,9 +82,12 @@
         if ([array count] > 0) {
             return;
         }
-        NSString *URL = [NSString stringWithFormat:@"http://api.geonames.org/searchJSON?country=%@&username=WeatherApp", _country.countryCode];
+        NSString *URLString = [NSString stringWithFormat:@"http://api.geonames.org/searchJSON?country=%@&username=WeatherApp", _country.countryCode];
+        if ([[self configurationHelper] productionEnvironment]) {
+            URLString = [URLString stringByAppendingString:[[self configurationHelper] maxCitiesPerCountryParameter]];
+        }
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        [request setURL:[NSURL URLWithString:URL]];
+        [request setURL:[NSURL URLWithString:URLString]];
         [request setHTTPMethod:@"GET"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         NSURLResponse *response;

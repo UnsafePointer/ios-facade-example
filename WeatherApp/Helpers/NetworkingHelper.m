@@ -15,10 +15,12 @@
 #import "Blocks.h"
 #import "CacheHelper.h"
 #import "City.h"
+#import "ConfigurationHelper.h"
 
 @interface NetworkingHelper ()
 
 @property (nonatomic, strong) TranslatorHelper *translatorHelper;
+@property (nonatomic, strong) ConfigurationHelper *configurationHelper;
 
 + (AFHTTPRequestOperation *)createHTTPRequestOperationWithConfiguration:(RequestOperationConfigBlock)configuration;
 
@@ -38,6 +40,14 @@
     return _translatorHelper;
 }
 
+- (ConfigurationHelper *)configurationHelper
+{
+    if (_configurationHelper == nil) {
+        _configurationHelper = [[ConfigurationHelper alloc] init];
+    }
+    return _configurationHelper;
+}
+
 #pragma mark - Private Methods
 
 + (AFHTTPRequestOperation *)createHTTPRequestOperationWithConfiguration:(RequestOperationConfigBlock)configuration
@@ -51,30 +61,6 @@
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     requestOperation.responseSerializer = requestOperationConfig.responseSerializer;
     return requestOperation;
-}
-
-#pragma mark - CitiesFetcher Protocol
-
-- (void)getCitiesWithCountry:(Country *)country
-                  completion:(ArrayCompletionBlock)completion
-{
-    AFHTTPRequestOperation *requestOperation = [NetworkingHelper createHTTPRequestOperationWithConfiguration:^(RequestOperationConfig *config) {
-        config.URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.geonames.org/searchJSON?country=%@&username=WeatherApp", country.countryCode]];
-        config.responseSerializer = [AFJSONResponseSerializer serializer];
-    }];
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (!completion) {
-            return;
-        }
-        NSArray *collection = [[self translatorHelper] translateCollectionFromJSON:[responseObject objectForKey:@"geonames"]
-                                                                     withClassName:@"City"];
-        completion(collection, nil);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (completion) {
-            completion(nil, error);
-        }
-    }];
-    [[NSOperationQueue mainQueue] addOperation:requestOperation];
 }
 
 #pragma mark - CountriesFetcher Protocol
@@ -91,6 +77,34 @@
         }
         NSArray *collection = [[self translatorHelper] translateCollectionFromJSON:[responseObject objectForKey:@"geonames"]
                                                                      withClassName:@"Country"];
+        completion(collection, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (completion) {
+            completion(nil, error);
+        }
+    }];
+    [[NSOperationQueue mainQueue] addOperation:requestOperation];
+}
+
+#pragma mark - CitiesFetcher Protocol
+
+- (void)getCitiesWithCountry:(Country *)country
+                  completion:(ArrayCompletionBlock)completion
+{
+    AFHTTPRequestOperation *requestOperation = [NetworkingHelper createHTTPRequestOperationWithConfiguration:^(RequestOperationConfig *config) {
+        NSString *URLString = [NSString stringWithFormat:@"http://api.geonames.org/searchJSON?country=%@&username=WeatherApp", country.countryCode];
+        if ([[self configurationHelper] productionEnvironment]) {
+            URLString = [URLString stringByAppendingString:[[self configurationHelper] maxCitiesPerCountryParameter]];
+        }
+        config.URL = [NSURL URLWithString:URLString];
+        config.responseSerializer = [AFJSONResponseSerializer serializer];
+    }];
+    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (!completion) {
+            return;
+        }
+        NSArray *collection = [[self translatorHelper] translateCollectionFromJSON:[responseObject objectForKey:@"geonames"]
+                                                                     withClassName:@"City"];
         completion(collection, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (completion) {

@@ -11,6 +11,7 @@
 		3F1DB170188850F1005C9C17 /* CountryManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DB16E188850F1005C9C17 /* CountryManagedObject.m */; };
 		3F21106218884E1C00CE428E /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F21106118884E1C00CE428E /* Station.m */; };
 		3F294ED8188984910013C51D /* CitiesOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F294ED7188984910013C51D /* CitiesOperation.m */; };
+		3F92E01C188FFF4D003B8236 /* ConfigurationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F92E01B188FFF4D003B8236 /* ConfigurationHelper.m */; };
 		3FC1CB09188800EE00845D9C /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1CB08188800EE00845D9C /* City.m */; };
 		3FC6F74318859381009D48CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC6F74218859381009D48CB /* Foundation.framework */; };
 		3FC6F74518859381009D48CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC6F74418859381009D48CB /* CoreGraphics.framework */; };
@@ -65,6 +66,8 @@
 		3F294ED6188984910013C51D /* CitiesOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CitiesOperation.h; path = Operations/CitiesOperation.h; sourceTree = "<group>"; };
 		3F294ED7188984910013C51D /* CitiesOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CitiesOperation.m; path = Operations/CitiesOperation.m; sourceTree = "<group>"; };
 		3F380DF718871C3D00BAEC2F /* CitiesStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CitiesStorage.h; path = Definitions/CitiesStorage.h; sourceTree = "<group>"; };
+		3F92E01A188FFF4D003B8236 /* ConfigurationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigurationHelper.h; path = Helpers/ConfigurationHelper.h; sourceTree = "<group>"; };
+		3F92E01B188FFF4D003B8236 /* ConfigurationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationHelper.m; path = Helpers/ConfigurationHelper.m; sourceTree = "<group>"; };
 		3FC1CB07188800EE00845D9C /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = City.h; path = Models/City.h; sourceTree = "<group>"; };
 		3FC1CB08188800EE00845D9C /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = City.m; path = Models/City.m; sourceTree = "<group>"; };
 		3FC6F73F18859381009D48CB /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,6 +335,8 @@
 				3FDA2BE31886C074001790F8 /* CacheHelper.m */,
 				3FDA2BEF1886E301001790F8 /* DatabaseHelper.h */,
 				3FDA2BF01886E301001790F8 /* DatabaseHelper.m */,
+				3F92E01A188FFF4D003B8236 /* ConfigurationHelper.h */,
+				3F92E01B188FFF4D003B8236 /* ConfigurationHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -507,6 +512,7 @@
 				3FF5DE96188EDA57004F275D /* StationManagedObject.m in Sources */,
 				3F21106218884E1C00CE428E /* Station.m in Sources */,
 				3FC1CB09188800EE00845D9C /* City.m in Sources */,
+				3F92E01C188FFF4D003B8236 /* ConfigurationHelper.m in Sources */,
 				3FC6F77D18859472009D48CB /* AppDelegate.m in Sources */,
 				3FE685171885B6EE00AEA2CD /* WeatherAppManager.m in Sources */,
 				3FE6850C18859B3800AEA2CD /* CountriesViewController.m in Sources */,
