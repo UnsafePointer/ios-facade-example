@@ -39,6 +39,7 @@ __Design notes:__
 __To-Do:__
 
 * `[✓]` <del>Make it public.</del>
+* `[✓]` <del>Write the blog post</del>. It's [here](http://ruenzuo.github.io/facade-software-design-pattern-on-ios-and-android/index.html).
 * `[ ]` Add tests.
 * `[ ]` Decide which strategy use depending on system resources like available memory, network state and others. 
 * `[ ]` Add synchronization pattern.
