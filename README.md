@@ -19,17 +19,17 @@ Then set up the dependencies and open the workspace and you're ready to go:
 $ cd ios-facade-example && pod install && open WeatherApp.xcworkspace
 ```  
 
-![ios-facade-screenshot-1.png](https://dl.dropboxusercontent.com/u/12352209/GitHub/ios-facade-screenshot-1.png)&nbsp;
-![ios-facade-screenshot-2.png](https://dl.dropboxusercontent.com/u/12352209/GitHub/ios-facade-screenshot-2.png)
-![ios-facade-screenshot-3.png](https://dl.dropboxusercontent.com/u/12352209/GitHub/ios-facade-screenshot-3.png)&nbsp;
-![ios-facade-screenshot-4.png](https://dl.dropboxusercontent.com/u/12352209/GitHub/ios-facade-screenshot-4.png)
+![ios-facade-screenshot-1.png](https://raw.githubusercontent.com/Ruenzuo/res/master/ios-facade-screenshot-1.png)&nbsp;
+![ios-facade-screenshot-2.png](https://raw.githubusercontent.com/Ruenzuo/res/master/ios-facade-screenshot-2.png)
+![ios-facade-screenshot-3.png](https://raw.githubusercontent.com/Ruenzuo/res/master/ios-facade-screenshot-3.png)&nbsp;
+![ios-facade-screenshot-4.png](https://raw.githubusercontent.com/Ruenzuo/res/master/ios-facade-screenshot-4.png)
 
 __Design notes:__
 
 * I used to keep Core Data relationships on MTLModel (check [v1.0](https://github.com/Ruenzuo/ios-facade-example/commit/b99d7f31a6afc4b4a37c992b51692270c5056f69)) but I ended up changing this later (check [v1.1](https://github.com/Ruenzuo/ios-facade-example/commit/ddcb34612bdbeca24df46da313721a543a3973b9)) which decreased memory usage from ~40MB to ~20MB and startup time from ~3s to ~0s.
 * Current data model:
 
-![ios-facade-screenshot-5.png](https://dl.dropboxusercontent.com/u/12352209/GitHub/ios-facade-screenshot-5.png)
+![ios-facade-screenshot-5.png](https://raw.githubusercontent.com/Ruenzuo/res/master/ios-facade-screenshot-5.png)
 
 * Probably this can be done without Mantel layer, I just think it makes things easier that handling NSManagedObject instances. 
 * There are a lot of performance and test hooks and methods that you don't need to have on production.
